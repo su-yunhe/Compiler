@@ -1,4 +1,3 @@
-import frontend.lexer.GeneralLexerTool;
 import frontend.lexer.Lexer;
 
 import java.io.Console;
@@ -36,8 +35,7 @@ public class Compiler {
         try (FileInputStream fis = new FileInputStream(currentDir + "\\input\\" + inputFileName)) {
             Lexer lexer = Lexer.getInstance(fis);
             System.out.println(lexer.getTokenList());
-            //GeneralLexerTool tool = GeneralLexerTool.getInstance(fis);
-            //System.out.println(tool.toString());
+
             return fis;
         } catch (IOException e) {
             System.err.println("Fail to open " + inputFileName);

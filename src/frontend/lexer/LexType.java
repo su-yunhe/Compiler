@@ -86,7 +86,7 @@ public enum LexType {
     LexType(boolean isGreed, String patternString) {
         this.isGreed = isGreed;
         this.patternString = patternString;
-        String regex = "^" + patternString + (isGreed ? "\\W" : "");
+        String regex = "^" + patternString + (isGreed ? "(?![_A-Za-z0-9])" : "");
         this.pattern = Pattern.compile(regex);
     }
 
