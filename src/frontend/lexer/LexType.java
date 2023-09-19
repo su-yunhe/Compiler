@@ -83,6 +83,7 @@ public enum LexType {
      * @param isGreed 是否贪婪匹配
      * @param patternString 正则表达式字符串
      */
+
     LexType(boolean isGreed, String patternString) {
         this.isGreed = isGreed;
         this.patternString = patternString;

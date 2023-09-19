@@ -71,7 +71,7 @@ public class Lexer {
      * 获取当前指针所在行数
      * @return int 当前行数
      */
-    public int getCurrentLine() {
+    public int getCurrentLineNum() {
         return this.curLine + 1;
     }
 
@@ -82,6 +82,8 @@ public class Lexer {
     public String getTokenList() {
         return this.tokenList.toString();
     }
+
+    /*************************************************************************/
 
     /**
      * token 分析
@@ -129,15 +131,16 @@ public class Lexer {
         // 检查目前指针指向的单词是否能够与LexType中的单词相匹配
         for (LexType lexType : LexType.values()) {
             String content = this.matchRegex(lexType.getPattern());
-            if (Objects.equals(content, "")) {
-                continue;
-            } else {
-                Token token = new Token(lexType, this.getCurrentLine(), content);
+            if (!Objects.equals(content, null)) {
+                Token token = new Token(lexType, this.getCurrentLineNum(), content);
                 this.tokenList.addToken(token);
                 this.moveForward(content.length());
-                break;
+                return;
             }
         }
+        // 说明遇到了非法字符
+        System.err.println("invalid content in line " + getCurrentLineNum());
+        System.exit(1); // 非零的退出码
     }
 
     /**
@@ -181,7 +184,7 @@ public class Lexer {
      */
     private String getCurLine() {
         if (isEndOfFile()) {
-            return "";
+            return null;
         } else {
             return this.lines.get(curLine);
         }
@@ -208,7 +211,7 @@ public class Lexer {
      */
     private String getSubString(int len) {
         if (isEndOfFile()) {
-            return "";
+            return null;
         }
         String curLine = getCurLine();
         int lineLength = curLine.length();
@@ -272,7 +275,7 @@ public class Lexer {
      */
     private String getRemainedOfLine() {
         if (isEndOfFile() || isEndOfLine()) {
-            return "";
+            return null;
         } else {
             return getCurLine().substring(curColumn);
         }
@@ -289,9 +292,7 @@ public class Lexer {
         if (matcher.find()) {
             return matcher.group(0);
         } else {
-            return "";
+            return null;
         }
     }
-
-
 }
