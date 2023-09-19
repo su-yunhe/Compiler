@@ -36,7 +36,6 @@ public class Compiler {
              FileWriter fileWriter = new FileWriter(outputFileName);
              BufferedWriter writer = new BufferedWriter(fileWriter)) {
             Lexer lexer = Lexer.getInstance(fis);
-            // System.out.println(lexer.getTokenList());
             // 写入内容到文件
             writer.write(lexer.getTokenList());
 

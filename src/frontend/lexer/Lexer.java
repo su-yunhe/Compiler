@@ -75,10 +75,18 @@ public class Lexer {
         return this.curLine + 1;
     }
 
+    /**
+     * 获取按行存储的源程序
+     * @return {@link ArrayList}<{@link String}>
+     */
     public ArrayList<String> getLines() {
         return this.lines;
     }
 
+    /**
+     * 获取TokenList
+     * @return {@link String} 标准输出格式
+     */
     public String getTokenList() {
         return this.tokenList.toString();
     }
@@ -91,13 +99,17 @@ public class Lexer {
      */
     private void tokenAnalyse() {
         while (!isEndOfFile()) {
-            // 首先跳过空白符
+            // 空白符
             skipWhiteSpace();
-            // 判断跳过注释的情况
-            if (skipComment()) {
+            // 注释
+            if (!isEndOfFile() && skipComment()) {
                 continue;
             }
-            next();
+            // 解析下一个单词
+            if (!isEndOfFile()) {
+                next();
+            }
+
         }
     }
 
@@ -128,10 +140,10 @@ public class Lexer {
      * 处理下一个单词
      */
     private void next() {
-        // 检查目前指针指向的单词是否能够与LexType中的单词相匹配
+        // 遍历LexType, 检查目前指针指向的单词是否能够与LexType中的类型相匹配
         for (LexType lexType : LexType.values()) {
             String content = this.matchRegex(lexType.getPattern());
-            if (!Objects.equals(content, null)) {
+            if (!Objects.equals(content, "")) {
                 Token token = new Token(lexType, this.getCurrentLineNum(), content);
                 this.tokenList.addToken(token);
                 this.moveForward(content.length());
@@ -184,14 +196,14 @@ public class Lexer {
      */
     private String getCurLine() {
         if (isEndOfFile()) {
-            return null;
+            return "";
         } else {
             return this.lines.get(curLine);
         }
     }
 
     /**
-     * 获取当前字符（即将要接信息的下一个字符）
+     * 获取当前字符
      * @return char 当前字符
      */
     private char getCurChar() {
@@ -211,7 +223,7 @@ public class Lexer {
      */
     private String getSubString(int len) {
         if (isEndOfFile()) {
-            return null;
+            return "";
         }
         String curLine = getCurLine();
         int lineLength = curLine.length();
@@ -275,7 +287,7 @@ public class Lexer {
      */
     private String getRemainedOfLine() {
         if (isEndOfFile() || isEndOfLine()) {
-            return null;
+            return "";
         } else {
             return getCurLine().substring(curColumn);
         }
@@ -292,7 +304,7 @@ public class Lexer {
         if (matcher.find()) {
             return matcher.group(0);
         } else {
-            return null;
+            return "";
         }
     }
 }
