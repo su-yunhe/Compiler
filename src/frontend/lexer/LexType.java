@@ -38,9 +38,13 @@ public enum LexType {
      * 匹配被双引号包围的任意字符串
      */
     STRCON(false, "\\\"[^\\\"]*\\\""),
-
-    NOT(false, "!"),
+    NEQ(false, "!="),
+    EQL(false, "=="),
+    LEQ(false, "<="),
+    GEQ(false, ">="),
     AND(false, "&&"),
+    NOT(false, "!"),
+
     OR(false, "\\|\\|"),
 
     PLUS(false, "\\+"),
@@ -50,11 +54,11 @@ public enum LexType {
     DIV(false, "/"),
     MOD(false, "%"),
     LSS(false, "<"),
-    LEQ(false, "<="),
+
     GRE(false, ">"),
-    GEQ(false, ">="),
-    EQL(false, "=="),
-    NEQ(false, "!="),
+
+
+
     ASSIGN(false, "="),
     SEMICN(false, ";"),
     COMMA(false, ","),
