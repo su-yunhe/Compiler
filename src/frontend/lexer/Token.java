@@ -2,8 +2,10 @@ package frontend.lexer;
 
 /**
  * 单词类，保存单词信息
+ *
  * @author SYH
- * @date 2023/09/17
+ * @date 2023/09/25
+ * @since 2023/09/17
  */
 public class Token {
     /**

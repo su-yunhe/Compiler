@@ -9,7 +9,7 @@ import java.io.IOException;
  * 编译器类
  *
  * @author SYH
- * @date 2023/09/18
+ * @since 2023/09/18
  */
 public class Compiler {
     /**
@@ -19,8 +19,8 @@ public class Compiler {
      */
     public static void main(String[] args) {
         // 1. 调用词法分析程序,生成单词列表
-//        useLexer(".//src//testfile.txt", ".//src//output.txt");
-        useLexer("testfile.txt", "output.txt");
+        useLexer(".//src//testfile.txt", ".//src//output.txt");
+//        useLexer("testfile.txt", "output.txt");
 
     }
 

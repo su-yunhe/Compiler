@@ -5,7 +5,7 @@ import java.util.regex.Pattern;
 /**
  * 单词类型枚举类
  * @author SYH
- * @date 2023/09/17
+ * @since 2023/09/17
  */
 public enum LexType {
 

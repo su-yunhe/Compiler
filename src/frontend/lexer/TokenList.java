@@ -5,7 +5,7 @@ import java.util.ArrayList;
 /**
  * Token列表类
  * @author SYH
- * @date 2023/09/18
+ * @since 2023/09/18
  */
 public class TokenList {
     /**
@@ -30,7 +30,7 @@ public class TokenList {
 
     /**
      * 获取当前的 Token列表
-     * @return {@link ArrayList}<{@link Token}> Token列表
+     * @return ArrayList of Token Token列表
      */
     public ArrayList<Token> getTokenList() {
         return this.tokens;

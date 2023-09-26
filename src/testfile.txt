@@ -1,21 +1,219 @@
+// 声明
+// 常量声明
+const int COMMON_VARIABLE1 = 0;
+const int COMMON_VARIABLE12 = 0, COMMON_VARIABLE13 = 0;
+const int ONE_D_ARRAY1[3] = {0, 0, 0};
+const int ONE_D_ARRAY2[3] = {0, 0, 0}, ONE_D_ARRAY3[3] = {0, 0, 0};
+const int TWO_D_ARRAY1[2][3] = {{0, 0, 0}, {0, 0, 0}};
+const int TWO_D_ARRAY2[2][3] = {{0, 0, 0}, {0, 0, 0}}, TWO_D_ARRAY3[2][3] = {{0, 0, 0}, {0, 0, 0}};
 
+// 变量声明
+int common_variable_n_1;
+int common_variable_n_2,common_variable_n_3;
+int one_d_array_n_1[3];
+int one_d_array_n_2[3], one_d_array_n_3[3];
+int two_d_array_n_1[2][3];
+int two_d_array_n_2[2][3], two_d_array_n_3[2][3];
 
+int common_variable_1 = 0;
+int common_variable_2 = 0,common_variable_3 = 0;
+int one_d_array_1[3] = {0, 0, 0};
+int one_d_array_2[3] = {0, 0, 0}, one_d_array_3[3] = {0, 0, 0};
+int two_d_array_1[2][3] = {{0, 0, 0}, {0, 0, 0}};
+int two_d_array_2[2][3] = {{0, 0, 0}, {0, 0, 0}}, two_d_array_3[2][3] = {{0, 0, 0}, {0, 0, 0}};
 
-                                        int main() {
-    return      0
-
-
-<=
-<
-
-    ;
-
-
-
-
-
+// 函数定义
+void func1() {
+    return;
 }
 
+void func2(int x) {
+    return;
+}
+
+void func3(int x[]) {
+    return;
+}
+
+void func4(int x[][3]) {
+    return;
+}
+
+int func5() {
+    return 0;
+}
+
+int func6(int x) {
+    return 0;
+}
+
+int func7(int x[]) {
+    return 0;
+}
+
+int func8(int x[][3]) {
+    return 0;
+}
+
+int is_odd(int x) {
+    if (x % 2 == 0) {
+        // 偶数
+        return 0;
+    } else {
+        // 奇数
+        return 1;
+    }
+    return 0;
+}
+
+int func9(int x, int y) {
+    int res;
+    if (x < y) {
+
+    }
+    if (x <= y) {
+        ;
+    }
+    if (x == y) {
+        res = 2;
+    }
+    if (x != y) {
+        res = 3;
+    }
+    if (x >= y) {
+        res = 4;
+    }
+    if (x > y) {
+        res = 5;
+    }
+    if (x > 0 && y > 0) {
+        res = 6;
+    }
+    if (x > 0 || y > 0) {
+        res = 7;
+    }
+    if (!x) {
+        res = 8;
+    }
+    if (+x) {
+        res = 9;
+    }
+    if (-x) {
+        res = 10;
+    }
+    return res;
+}
+
+// 主函数
+int main() {
+//    int a;
+    int i;
+    int b[3];
+    int c[2][3];
+//
+    // 语句1 Stmt → LVal '=' Exp ';'
+    b[0] = 0;
+    c[0][0] = 0;
+    int d[2][2]={{1,2},{3,4}};
+    int e[2][2]={{d[0][0],d[0][1]},{d[1][0],d[1][1]}};
 
 
+    // 语句2  [Exp] ';'
+    {}
 
+    // 语句3 Block
+
+    // 语句4 if
+    i = getint();
+    if (i > 0) {
+        i = i + 1;
+    }
+
+    if (i > 0) {
+        i = i + 1;
+    }
+    else {
+        i = i - 1;
+    }
+
+    // 语句5 for
+    i = 0;
+    for (i = 0; i < 10; i = i + 1) {
+        if (i == 1) {
+            i = 0;
+            break;
+        }
+    }
+    for (; i < 10; i = i + 1) {
+        if (i == 1) {
+            i = 0;
+            break;
+        }
+    }
+    for (i = 0; ;i = i + 1) {
+        if (i == 1) {
+            i = 0;
+            break;
+        }
+    }
+    for (i = 0; i < 10; ) {
+        i = i + 1;
+        if (i == 1) {
+            i = 0;
+            break;
+        }
+    }
+    for (i = 0; ;) {
+        i = i + 1;
+        if (i == 1) {
+            i = 0;
+            break;
+        }
+    }
+    for (; i < 10;) {
+        i = i + 1;
+        if (i == 1) {
+            i = 0;
+            break;
+        }
+    }
+
+    for (; ;i = i + 1) {
+        if (i == 1) {
+            i = 0;
+            break;
+        }
+    }
+
+    for (;;) {
+        i = i + 1;
+        if (i == 1) {
+            continue;
+        }
+        if (i == 2) {
+            i = 0;
+            break;
+        }
+    }
+    // 覆盖表达式 Exp → AddExp
+    // 加减表达式 AddExp → MulExp | AddExp ('+' | '−') MulExp
+    // 乘除模表达式 MulExp → UnaryExp | MulExp ('*' | '/' | '%') UnaryExp
+    // 一元表达式 UnaryExp → PrimaryExp | Ident '(' [FuncRParams] ')' // 3种情况均需覆盖,函数调用也需要覆盖FuncRParams的不同情况
+    // 基本表达式 PrimaryExp → '(' Exp ')' | LVal | Number // 三种情况均需覆盖
+
+    int j;
+    j = i;
+    i = i * i;
+    i = i / 2;
+    i = 10;
+    i = i % 2;
+    i = (1 + 2) * 3;
+    i = 0;
+    func1();
+    func2(1);
+    func9(1, 2);
+    printf("21373007\n");
+    printf("%d\n", i);
+
+    return 0;
+}

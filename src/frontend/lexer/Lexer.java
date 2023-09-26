@@ -10,7 +10,7 @@ import java.util.regex.Pattern;
  * 词法成分分析器【单例模式】
  * 功能：构建从源代码中识别出的所有有效 Token 所组成的 TokenList 和 TokenMap
  * @author SYH
- * @date 2023/09/18
+ * @since 2023/09/18
  */
 public class Lexer {
     /**
@@ -77,7 +77,7 @@ public class Lexer {
 
     /**
      * 获取按行存储的源程序
-     * @return {@link ArrayList}<{@link String}>
+     * @return ArrayList of String
      */
     public ArrayList<String> getLines() {
         return this.lines;
