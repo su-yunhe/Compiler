@@ -21,4 +21,13 @@ public class PrimaryExp implements UnaryExpEle {
     public PrimaryExp(PrimaryExpEle primaryExpEle) {
         this.primaryExpEle = primaryExpEle;
     }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append(this.primaryExpEle.toString());
+        sb.append(this.name).append("\n");
+        return sb.toString();
+    }
+
 }

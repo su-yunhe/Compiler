@@ -15,4 +15,12 @@ public class UnaryOp {
     public UnaryOp(Token token) {
         this.token = token;
     }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append(token.toString());
+        sb.append(this.name).append("\n");
+        return sb.toString();
+    }
 }

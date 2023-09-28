@@ -14,4 +14,11 @@ public class InitVal {
         this.initValEle = initValEle;
     }
 
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append(this.initValEle.toString());
+        sb.append(this.name).append("\n");
+        return sb.toString();
+    }
 }

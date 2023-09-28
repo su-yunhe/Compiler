@@ -13,4 +13,12 @@ public class FuncType {
     public FuncType(FuncTypeEle funcTypeEle) {
         this.funcTypeEle = funcTypeEle;
     }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append(this.funcTypeEle.toString());
+        sb.append(this.name).append("\n");
+        return sb.toString();
+    }
 }

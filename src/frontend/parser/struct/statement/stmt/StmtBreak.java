@@ -17,4 +17,12 @@ public class StmtBreak implements StmtEle{
         this.breakTk = breakTk;
         this.semicn = semicn;
     }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append(this.breakTk.toString());
+        sb.append(this.semicn.toString());
+        return sb.toString();
+    }
 }

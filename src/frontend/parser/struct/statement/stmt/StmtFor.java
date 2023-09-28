@@ -34,4 +34,25 @@ public class StmtFor implements StmtEle{
         this.rightParent = rightParent;
         this.stmt = stmt;
     }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append(this.forTk.toString());
+        sb.append(this.leftParent.toString());
+        if (this.forStmt1 != null) {
+            sb.append(this.forStmt1.toString());
+        }
+        sb.append(semiTk1.toString());
+        if (this.cond != null) {
+            sb.append(this.cond.toString());
+        }
+        sb.append(semiTk2.toString());
+        if (this.forStmt2 != null) {
+            sb.append(this.forStmt2.toString());
+        }
+        sb.append(this.rightParent.toString());
+        sb.append(this.stmt.toString());
+        return sb.toString();
+    }
 }

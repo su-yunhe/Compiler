@@ -83,5 +83,9 @@ public class Token {
         this.lineNum = lineNum;
     }
 
+    @Override
+    public String toString() {
+        return this.lexType.toString() + ' ' + this.content + '\n';
+    }
 
 }

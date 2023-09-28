@@ -41,4 +41,19 @@ public class FuncDef {
         this(funcType, ident, leftParent, rightParent, block);
         this.funcFParams = funcFParams;
     }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append(this.funcType.toString());
+        sb.append(this.ident.toString());
+        sb.append(this.leftParent.toString());
+        if (this.funcFParams != null) {
+            sb.append(this.funcFParams.toString());
+        }
+        sb.append(this.rightParent.toString());
+        sb.append(this.block.toString());
+        sb.append(this.name).append("\n");
+        return sb.toString();
+    }
 }

@@ -42,4 +42,21 @@ public class ConstDecl implements DeclEle {
         this.constDefs = constDefs;
     }
 
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append(constTk.toString());
+        sb.append(btype.toString());
+        sb.append(first.toString());
+        if (commas != null && constDefs != null && commas.size() == constDefs.size()) {
+            int len = commas.size();
+            for (int i = 0; i < len; i++) {
+                sb.append(this.commas.get(i).toString());
+                sb.append(this.constDefs.get(i).toString());
+            }
+        }
+        sb.append(this.semicn.toString());
+        sb.append(this.name).append("\n");
+        return sb.toString();
+    }
 }

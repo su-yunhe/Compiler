@@ -29,4 +29,23 @@ public class InitValMulti implements InitValEle{
         this.rightBrace = rightBrace;
     }
 
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append(this.leftBrace.toString());
+        if (first != null) {
+            sb.append(this.first.toString());
+            if (this.commas != null && this.initVals != null &&
+                    this.commas.size() == this.initVals.size()) {
+                int len = this.commas.size();
+                for (int i = 0; i < len; i++) {
+                    sb.append(this.commas.get(i).toString());
+                    sb.append(this.initVals.get(i).toString());
+                }
+            }
+        }
+        sb.append(this.rightBrace.toString());
+        return sb.toString();
+    }
+
 }

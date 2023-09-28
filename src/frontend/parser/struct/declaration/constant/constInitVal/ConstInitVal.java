@@ -13,4 +13,12 @@ public class ConstInitVal {
     public ConstInitVal(ConstInitValEle constInitValEle) {
         this.constInitValEle = constInitValEle;
     }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append(constInitValEle.toString());
+        sb.append(this.name).append("\n");
+        return sb.toString();
+    }
 }

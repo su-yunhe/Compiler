@@ -13,4 +13,12 @@ public class VarDef {
     public VarDef(VarDefEle varDefEle) {
         this.varDefEle = varDefEle;
     }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append(this.varDefEle.toString());
+        sb.append(this.name).append("\n");
+        return sb.toString();
+    }
 }

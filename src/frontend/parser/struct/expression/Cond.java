@@ -15,4 +15,12 @@ public class Cond {
     public Cond(LOrExp lOrExp) {
         this.lOrExp = lOrExp;
     }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append(lOrExp.toString());
+        sb.append(this.name + "\n");
+        return sb.toString();
+    }
 }

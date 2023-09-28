@@ -22,4 +22,12 @@ public class UnaryExp {
     public UnaryExp(UnaryExpEle unaryExpEle) {
         this.unaryExpEle = unaryExpEle;
     }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append(this.unaryExpEle.toString());
+        sb.append(this.name).append("\n");
+        return sb.toString();
+    }
 }

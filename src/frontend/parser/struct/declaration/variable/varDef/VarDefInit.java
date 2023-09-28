@@ -34,4 +34,22 @@ public class VarDefInit implements VarDefEle {
         this.eq = eq;
         this.initVal = initVal;
     }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append(ident.toString());
+        if (leftBraces != null && constExps != null && rightBraces != null &&
+                leftBraces.size() == constExps.size() && constExps.size() == rightBraces.size()) {
+            int len = leftBraces.size();
+            for (int i = 0; i < len; i++) {
+                sb.append(this.leftBraces.get(i).toString());
+                sb.append(this.constExps.get(i).toString());
+                sb.append(this.rightBraces.get(i).toString());
+            }
+        }
+        sb.append(this.eq.toString());
+        sb.append(this.initVal.toString());
+        return sb.toString();
+    }
 }

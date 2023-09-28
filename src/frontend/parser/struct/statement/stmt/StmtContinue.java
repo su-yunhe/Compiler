@@ -16,4 +16,12 @@ public class StmtContinue implements StmtEle{
         this.continueTk = continueTk;
         this.semicn = semicn;
     }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append(this.continueTk.toString());
+        sb.append(this.semicn.toString());
+        return sb.toString();
+    }
 }

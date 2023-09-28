@@ -26,4 +26,16 @@ public class StmtReturn implements StmtEle{
         this(returnTk, semicn);
         this.exp = exp;
     }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append(this.returnTk.toString());
+        if (exp != null) {
+            sb.append(this.exp.toString());
+        }
+        sb.append(this.semicn.toString());
+        return sb.toString();
+    }
+
 }

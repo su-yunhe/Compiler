@@ -42,4 +42,19 @@ public abstract class AbstractMultiExp<T>  {
         this.name = name;
     }
 
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append(first.toString());
+        sb.append(this.name).append("\n");
+        if (operators != null && operands != null && operators.size() == operands.size()) {
+            int len = operators.size();
+            for (int i = 0; i < len; i++) {
+                sb.append(operators.get(i).toString());
+                sb.append(operands.get(i).toString());
+                sb.append(this.name).append("\n");
+            }
+        }
+        return sb.toString();
+    }
 }

@@ -27,4 +27,20 @@ public class FuncFParams {
         this.commas = commas;
         this.funcFParams = funcFParams;
     }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append(this.first.toString());
+        if (this.commas != null && this.funcFParams != null &&
+                this.commas.size() == this.funcFParams.size()) {
+            int len = this.commas.size();
+            for (int i = 0; i < len; i++) {
+                sb.append(this.commas.get(i).toString());
+                sb.append(this.funcFParams.get(i).toString());
+            }
+        }
+        sb.append(this.name).append("\n");
+        return sb.toString();
+    }
 }

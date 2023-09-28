@@ -23,4 +23,19 @@ public class FuncRParams {
         this.commas = commas;
         this.exps = exps;
     }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append(first.toString());
+        if (commas != null && exps != null && commas.size() == exps.size()) {
+            int len = commas.size();
+            for (int i = 0; i < len; i++) {
+                sb.append(commas.get(i).toString());
+                sb.append(exps.get(i).toString());
+            }
+        }
+        sb.append(this.name).append("\n");
+        return sb.toString();
+    }
 }

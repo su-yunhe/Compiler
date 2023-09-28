@@ -14,4 +14,11 @@ public class FuncTypeInt implements FuncTypeEle {
     public FuncTypeInt(Token intTk) {
         this.intTk = intTk;
     }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append(this.intTk.toString());
+        return sb.toString();
+    }
 }

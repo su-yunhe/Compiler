@@ -18,4 +18,12 @@ public class Number implements PrimaryExpEle{
     public IntConst getIntConst() {
         return intConst;
     }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append(intConst.toString());
+        sb.append(this.name).append("\n");
+        return sb.toString();
+    }
 }

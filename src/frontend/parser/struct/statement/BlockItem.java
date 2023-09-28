@@ -12,4 +12,11 @@ public class BlockItem {
     public BlockItem(BlockItemEle blockItemEle) {
         this.blockItemEle = blockItemEle;
     }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append(this.blockItemEle.toString());
+        return sb.toString();
+    }
 }

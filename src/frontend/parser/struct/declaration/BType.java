@@ -15,4 +15,12 @@ public class BType {
     public BType(Token token) {
         this.token = token;
     }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append(token.toString());
+        /* not output BType according to assignment requirement */
+        return sb.toString();
+    }
 }

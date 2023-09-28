@@ -10,6 +10,7 @@ import frontend.parser.struct.expression.primaryExp.LVal;
  * @date 2023/09/26
  */
 public class ForStmt {
+    private final String name = "<ForStmt>";
     private LVal lVal;
     private Token eq; // =
     private Exp exp;
@@ -18,6 +19,16 @@ public class ForStmt {
         this.lVal = lVal;
         this.eq = eq;
         this.exp = exp;
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append(this.lVal.toString());
+        sb.append(this.eq.toString());
+        sb.append(this.exp.toString());
+        sb.append(this.name).append("\n");
+        return sb.toString();
     }
 
 }

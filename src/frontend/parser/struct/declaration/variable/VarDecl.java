@@ -33,4 +33,21 @@ public class VarDecl implements DeclEle {
         this.semi = semi;
     }
 
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append(this.btype.toString());
+        sb.append(this.first.toString());
+        if (this.commas != null && this.varDefs != null &&
+                this.commas.size() == this.varDefs.size()) {
+            int len = this.commas.size();
+            for (int i = 0; i < len; i++) {
+                sb.append(this.commas.get(i).toString());
+                sb.append(this.varDefs.get(i).toString());
+            }
+        }
+        sb.append(this.semi.toString());
+        sb.append(this.name + "\n");
+        return sb.toString();
+    }
 }

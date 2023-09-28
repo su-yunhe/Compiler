@@ -24,9 +24,9 @@ public class StmtParser {
                 this.stmtEle = stmtCondParser.parseStmtCond();
                 break;
             case FORTK: // 'for' -------------------------------------------
-//                this.iterator.unReadToken(1);
-//                StmtWhileParser stmtWhileParser = new StmtWhileParser(this.iterator);
-//                this.stmtEle = stmtWhileParser.parseStmtWhile();
+                this.iterator.unReadToken(1);
+                StmtForParser stmtForParser = new StmtForParser(this.iterator);
+                this.stmtEle = stmtForParser.parseStmtFor();
                 break;
             case BREAKTK: // 'break'
                 this.iterator.unReadToken(1);

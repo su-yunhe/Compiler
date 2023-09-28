@@ -14,4 +14,12 @@ public class UnaryExpOp implements UnaryExpEle{
         this.unaryOp = unaryOp;
         this.unaryExp = unaryExp;
     }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append(this.unaryOp.toString());
+        sb.append(this.unaryExp.toString());
+        return sb.toString();
+    }
 }

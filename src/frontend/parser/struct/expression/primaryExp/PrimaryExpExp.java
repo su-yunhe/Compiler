@@ -19,4 +19,14 @@ public class PrimaryExpExp implements PrimaryExpEle {
         this.exp = exp;
         this.rightParent = rightParent;
     }
+
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append(leftParent.toString());
+        sb.append(exp.toString());
+        sb.append(rightParent.toString());
+        return sb.toString();
+    }
 }

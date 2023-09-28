@@ -36,4 +36,23 @@ public class StmtPrintf implements StmtEle{
         this.rightParent = rightParent;
         this.semicn = semicn;
     }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append(this.printf.toString());
+        sb.append(this.leftParent.toString());
+        sb.append(this.formatString.toString());
+        if (this.commmas != null && this.exps != null &&
+                this.commmas.size() == this.exps.size()) {
+            int len = this.commmas.size();
+            for (int i = 0; i < len; i++) {
+                sb.append(this.commmas.get(i).toString());
+                sb.append(this.exps.get(i).toString());
+            }
+        }
+        sb.append(this.rightParent.toString());
+        sb.append(this.semicn.toString());
+        return sb.toString();
+    }
 }

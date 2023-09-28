@@ -35,4 +35,24 @@ public class ConstDef{
         this.eq = eq;
         this.constInitval = constInitval;
     }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append(this.ident.toString());
+        if (this.leftBracks != null && this.rightBrackets != null && this.constExps != null &&
+                this.leftBracks.size() == this.constExps.size() &&
+                this.constExps.size() == this.rightBrackets.size()) {
+            int len = leftBracks.size();
+            for (int i = 0; i < len; i++) {
+                sb.append(this.leftBracks.get(i).toString());
+                sb.append(this.constExps.get(i).toString());
+                sb.append(this.rightBrackets.get(i).toString());
+            }
+        }
+        sb.append(this.eq.toString());
+        sb.append(this.constInitval.toString());
+        sb.append(this.name).append("\n");
+        return sb.toString();
+    }
 }

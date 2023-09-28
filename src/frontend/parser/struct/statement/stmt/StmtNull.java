@@ -14,4 +14,11 @@ public class StmtNull implements StmtEle{
     public StmtNull(Token semicn) {
         this.semicn = semicn;
     }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append(this.semicn.toString());
+        return sb.toString();
+    }
 }

@@ -29,4 +29,24 @@ public class CompUnit {
         this.decls = decls;
         this.funcDefs = funcDefs;
     }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        if (this.decls != null) {
+            int len = this.decls.size();
+            for (int i = 0; i < len; i++) {
+                sb.append(this.decls.get(i).toString());
+            }
+        }
+        if (this.funcDefs != null) {
+            int len = this.funcDefs.size();
+            for (int i = 0; i < len; i++) {
+                sb.append(this.funcDefs.get(i).toString());
+            }
+        }
+        sb.append(this.mainFuncDef.toString());
+        sb.append(this.name).append("\n");
+        return sb.toString();
+    }
 }

@@ -84,11 +84,15 @@ public class Lexer {
     }
 
     /**
-     * 获取TokenList
+     * 打印TokenList
      * @return {@link String} 标准输出格式
      */
-    public String getTokenList() {
+    public String printTokenList() {
         return this.tokenList.toString();
+    }
+
+    public TokenList getTokenList() {
+        return this.tokenList;
     }
 
     /*************************************************************************/
@@ -164,7 +168,7 @@ public class Lexer {
             while ((lineNow = bufferedReader.readLine()) != null) {
                 this.lines.add(lineNow);
             }
-            System.out.println(lines);
+            // System.out.println(lines);
         } catch (IOException e) {
             System.err.println("Fail when readLines()");
         }

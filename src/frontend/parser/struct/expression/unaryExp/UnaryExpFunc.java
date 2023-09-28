@@ -50,4 +50,16 @@ public class UnaryExpFunc implements UnaryExpEle{
         this(ident, leftParent, rightBracker);
         this.funcRParams = funcRParams;
     }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append(ident.toString());
+        sb.append(leftParent.toString());
+        if (funcRParams != null) {
+            sb.append(this.funcRParams.toString());
+        }
+        sb.append(rightParent.toString());
+        return sb.toString();
+    }
 }

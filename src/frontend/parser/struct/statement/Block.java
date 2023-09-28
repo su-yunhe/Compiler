@@ -25,4 +25,19 @@ public class Block implements StmtEle {
         this.blockItems = blockItems;
         this.rightBrace = rightBrace;
     }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append(this.leftBrace.toString());
+        if (blockItems != null && blockItems.size() != 0) {
+            int len = blockItems.size();
+            for (int i = 0; i < len; i++) {
+                sb.append(this.blockItems.get(i).toString());
+            }
+        }
+        sb.append(this.rightBrace.toString());
+        sb.append(this.name).append("\n");
+        return sb.toString();
+    }
 }

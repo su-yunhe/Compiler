@@ -28,4 +28,16 @@ public class MainFuncDef {
         this.rightParent = rightParent;
         this.block = block;
     }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append(this.intTk.toString());
+        sb.append(this.mainTk.toString());
+        sb.append(this.leftParent.toString());
+        sb.append(this.rightParent.toString());
+        sb.append(this.block.toString());
+        sb.append(this.name).append("\n");
+        return sb.toString();
+    }
 }

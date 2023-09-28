@@ -50,4 +50,27 @@ public class FuncFParam {
         this.constExps = constExps;
         this.rightBrackets = rightBrackets;
     }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append(this.btype.toString());
+        sb.append(this.ident.toString());
+        if (this.leftBracketFirst != null && this.rightBracketFirst != null) {
+            sb.append(this.leftBracketFirst.toString());
+            sb.append(this.rightBracketFirst.toString());
+            if (this.leftBrackets != null && this.constExps != null && this.rightBrackets != null &&
+                    this.leftBrackets.size() == this.constExps.size() &&
+                    this.constExps.size() == this.rightBrackets.size()) {
+                int len = this.leftBrackets.size();
+                for (int i = 0; i < len; i++) {
+                    sb.append(this.leftBrackets.get(i).toString());
+                    sb.append(this.constExps.get(i).toString());
+                    sb.append(this.rightBrackets.get(i).toString());
+                }
+            }
+        }
+        sb.append(this.name).append("\n");
+        return sb.toString();
+    }
 }

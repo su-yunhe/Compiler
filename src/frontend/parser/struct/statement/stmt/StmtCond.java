@@ -41,4 +41,19 @@ public class StmtCond implements StmtEle{
         this.elseTk = elseTk;
         this.elseStmt = elseStmt;
     }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append(this.ifTk.toString());
+        sb.append(this.leftParent.toString());
+        sb.append(this.cond.toString());
+        sb.append(this.rightParent.toString());
+        sb.append(this.ifStmt.toString());
+        if (elseTk != null) {
+            sb.append(this.elseTk.toString());
+            sb.append(this.elseStmt.toString());
+        }
+        return sb.toString();
+    }
 }

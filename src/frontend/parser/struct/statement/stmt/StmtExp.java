@@ -17,4 +17,12 @@ public class StmtExp implements StmtEle{
         this.exp = exp;
         this.semicn = semicn;
     }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append(this.exp.toString());
+        sb.append(this.semicn.toString());
+        return sb.toString();
+    }
 }

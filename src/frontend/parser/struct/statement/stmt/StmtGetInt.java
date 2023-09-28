@@ -30,4 +30,16 @@ public class StmtGetInt implements StmtEle{
         this.rightParent = rightParent;
         this.semicn = semicn;
     }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append(this.lval.toString());
+        sb.append(this.eq.toString());
+        sb.append(this.getint.toString());
+        sb.append(this.leftParent.toString());
+        sb.append(this.rightParent.toString());
+        sb.append(this.semicn.toString());
+        return sb.toString();
+    }
 }

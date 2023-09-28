@@ -16,6 +16,10 @@ public class TokenListIterator {
         return iterator;
     }
 
+    /**
+     * 返回 TokenList 中的下一个元素并前进光标位置。
+     * @return {@link Token}
+     */
     public Token readNextToken() {
         return last = this.iterator.next();
     }

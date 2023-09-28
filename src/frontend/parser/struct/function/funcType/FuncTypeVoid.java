@@ -14,4 +14,10 @@ public class FuncTypeVoid implements FuncTypeEle {
         this.voidTk = voidTk;
     }
 
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append(this.voidTk.toString());
+        return sb.toString();
+    }
 }

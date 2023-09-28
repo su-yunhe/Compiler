@@ -10,8 +10,14 @@ import frontend.parser.struct.statement.Block;
  */
 public class StmtBlock implements StmtEle{
     private Block block;
-
     public StmtBlock(Block block) {
         this.block = block;
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append(this.block.toString());
+        return sb.toString();
     }
 }

@@ -45,4 +45,11 @@ public class Ident {
     public int getLineNum() {
         return this.token.getLineNum();
     }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append(token.toString());
+        return sb.toString();
+    }
 }

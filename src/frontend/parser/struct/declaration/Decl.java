@@ -15,4 +15,13 @@ public class Decl implements BlockItemEle {
     public Decl(DeclEle declEle) {
         this.declEle = declEle;
     }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        /* not output BType according to assignment requirement */
+        sb.append(this.declEle.toString());
+        return sb.toString();
+    }
+
 }

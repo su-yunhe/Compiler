@@ -24,4 +24,12 @@ public class Stmt implements BlockItemEle {
     public Stmt(StmtEle stmtEle) {
         this.stmtEle = stmtEle;
     }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append(this.stmtEle.toString());
+        sb.append(this.name).append("\n");
+        return sb.toString();
+    }
 }

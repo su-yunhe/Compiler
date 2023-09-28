@@ -28,4 +28,21 @@ public class LVal implements PrimaryExpEle {
         this.exps = exps;
         this.rightBrackets = rightBrackets;
     }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append(ident.toString());
+        if (leftBrackets != null && exps != null && rightBrackets != null &&
+                leftBrackets.size() == exps.size() && exps.size() == rightBrackets.size()) {
+            int len = leftBrackets.size();
+            for (int i = 0; i < len; i++) {
+                sb.append(leftBrackets.get(i).toString());
+                sb.append(exps.get(i).toString());
+                sb.append(rightBrackets.get(i).toString());
+            }
+        }
+        sb.append(this.name).append("\n");
+        return sb.toString();
+    }
 }

@@ -44,7 +44,7 @@ public class CompUnitParser {
         parseFuncDefs();
         /* parse MainFuncDef */
         parseMainFuncDef();
-
+        System.out.println(1);
         return new CompUnit(this.decls, this.funcDefs, this.mainFuncDef);
     }
 

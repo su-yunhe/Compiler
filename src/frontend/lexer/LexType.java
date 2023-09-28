@@ -115,4 +115,6 @@ public enum LexType {
     public String getPatternString() {
         return this.patternString;
     }
+
+
 }

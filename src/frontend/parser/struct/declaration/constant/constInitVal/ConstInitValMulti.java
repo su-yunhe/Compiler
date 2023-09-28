@@ -40,4 +40,23 @@ public class ConstInitValMulti implements ConstInitValEle{
         this.commas = commas;
         this.constInitVals = constInitVals;
     }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append(this.leftBrace.toString());
+        if (this.first != null) {
+            sb.append(this.first.toString());
+            if (this.commas != null && this.constInitVals != null
+                    && this.commas.size() == this.constInitVals.size()) {
+                int len = this.commas.size();
+                for (int i = 0; i < len; i++) {
+                    sb.append(this.commas.get(i).toString());
+                    sb.append(this.constInitVals.get(i).toString());
+                }
+            }
+        }
+        sb.append(this.rightBrace.toString());
+        return sb.toString();
+    }
 }
