@@ -57,6 +57,10 @@ public class Token {
         return content;
     }
 
+    public LexType getType() {
+        return lexType;
+    }
+
 
     /** 设置单词种类
      * @param lexType 单词种类
@@ -78,4 +82,6 @@ public class Token {
     public void setLineNum(int lineNum) {
         this.lineNum = lineNum;
     }
+
+
 }
