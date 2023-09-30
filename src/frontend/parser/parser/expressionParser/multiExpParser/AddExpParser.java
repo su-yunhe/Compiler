@@ -2,41 +2,35 @@ package frontend.parser.parser.expressionParser.multiExpParser;
 
 import frontend.lexer.LexType;
 import frontend.lexer.Token;
-import frontend.lexer.TokenListIterator;
+import frontend.parser.TLIterator;
 import frontend.parser.struct.expression.multiExp.AddExp;
 import frontend.parser.struct.expression.multiExp.MulExp;
 
 import java.util.ArrayList;
 
 public class AddExpParser {
-    private TokenListIterator iterator;
     /* AddExp Attributes */
     private MulExp first = null;
     private ArrayList<Token> operators = new ArrayList<>(); // '+' '-'
     private ArrayList<MulExp> operands = new ArrayList<>();
-
-    public AddExpParser(TokenListIterator iterator) {
-        this.iterator = iterator;
-    }
-
     /**
      * AddExp -> MulExp { ('+' | '-') MulExp }
      * @return {@link AddExp}
      */
     public AddExp parseAddExp() {
-        this.operands = new ArrayList<>();
-        this.operators = new ArrayList<>();
+        operands = new ArrayList<>();
+        operators = new ArrayList<>();
         /* MulExp */
-        MulExpParser mulExpParser = new MulExpParser(this.iterator);
-        this.first = mulExpParser.parseMulExp();
-        Token token = this.iterator.readNextToken();
+        first = new MulExpParser().parseMulExp();
+        Token token = TLIterator.readNextToken();
         while (token.getType().equals(LexType.PLUS) ||
                 token.getType().equals(LexType.MINU)) { // + -
-            this.operators.add(token);
-            this.operands.add(mulExpParser.parseMulExp());
-            token = this.iterator.readNextToken();
+            operators.add(token);
+            MulExp mulExp = new MulExpParser().parseMulExp();
+            operands.add(mulExp);
+            token = TLIterator.readNextToken();
         }
-        this.iterator.unReadToken(1);
-        return new AddExp(this.first, this.operators, this.operands);
+        TLIterator.unReadToken(1);
+        return new AddExp(first, operators, operands);
     }
 }

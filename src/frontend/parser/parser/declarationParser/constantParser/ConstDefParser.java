@@ -2,7 +2,7 @@ package frontend.parser.parser.declarationParser.constantParser;
 
 import frontend.lexer.LexType;
 import frontend.lexer.Token;
-import frontend.lexer.TokenListIterator;
+import frontend.parser.TLIterator;
 import frontend.parser.parser.expressionParser.ConstExpParser;
 import frontend.parser.parser.terminalParser.IdentParser;
 import frontend.parser.struct.declaration.constant.ConstDef;
@@ -13,8 +13,6 @@ import frontend.parser.struct.terminal.Ident;
 import java.util.ArrayList;
 
 public class ConstDefParser {
-    private TokenListIterator iterator;
-    /* ConstDef Attributes */
     private Ident ident;
     private ArrayList<Token> leftBrackets = new ArrayList<>();
     private ArrayList<ConstExp> constExps = new ArrayList<>();
@@ -22,39 +20,36 @@ public class ConstDefParser {
     private Token eq; // =
     private ConstInitVal constInitVal;
 
-    public ConstDefParser(TokenListIterator iterator) {
-        this.iterator = iterator;
-    }
-
+    /**
+     * ConstDef → Ident { '[' ConstExp ']' } '=' ConstInitVal
+     * @return {@link ConstDef}
+     */
     public ConstDef parseConstDef() {
-        this.leftBrackets = new ArrayList<>();
-        this.constExps = new ArrayList<>();
-        this.rightBrackets = new ArrayList<>();
-        IdentParser identParser = new IdentParser(this.iterator);
-        ident = identParser.parseIdent();
-        Token token = iterator.readNextToken();
+        leftBrackets = new ArrayList<>();
+        constExps = new ArrayList<>();
+        rightBrackets = new ArrayList<>();
+        ident = new IdentParser().parseIdent();
+        Token token = TLIterator.readNextToken();
         while (token.getType().equals(LexType.LBRACK)) {
             /* '[' */
-            this.leftBrackets.add(token);
+            leftBrackets.add(token);
             /* ConstExp */
-            ConstExpParser constExpParser = new ConstExpParser(this.iterator);
-            ConstExp constExp = constExpParser.parseConstExp();
-            this.constExps.add(constExp);
-            token = this.iterator.readNextToken();
+            ConstExp constExp = new ConstExpParser().parseConstExp();
+            constExps.add(constExp);
+            token = TLIterator.readNextToken();
             /* ']' */
             if (!token.getType().equals(LexType.RBRACK)) {
                 System.out.println("EXPECT RBRACK HERE");
             }
-            this.rightBrackets.add(token);
-            token = this.iterator.readNextToken();
+            rightBrackets.add(token);
+            token = TLIterator.readNextToken();
         }
+        /* = */
         if (!token.getType().equals(LexType.ASSIGN)) {
             System.out.println("EXPECT ASSIGN HERE");
         }
-        this.eq = token;
-        ConstInitValParser constInitValParser = new ConstInitValParser(this.iterator);
-        this.constInitVal = constInitValParser.parseConstInitVal();
-        return new ConstDef(this.ident, this.leftBrackets, this.constExps,
-                this.rightBrackets, this.eq, this.constInitVal);
+        eq = token;
+        this.constInitVal = new ConstInitValParser().parseConstInitVal();
+        return new ConstDef(ident, leftBrackets, constExps, rightBrackets, eq, constInitVal);
     }
 }

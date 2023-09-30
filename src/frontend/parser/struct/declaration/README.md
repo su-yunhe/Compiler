@@ -45,7 +45,7 @@ ConstInitVal → ConstInitEle = ConstExp | '{' [ ConstInitVal { ',' ConstInitVal
 被 ConstExp 和 ConstInitValMulti 继承
 
 #### 2.3.5. ConstInitValMulti 常量数组初值类
-ConstInitVal -> '{' [ <ConstInitVal> { ',' <ConstInitVal> } ] '}'
+ConstInitValMulti -> '{' [ <ConstInitVal> { ',' <ConstInitVal> } ] '}'
 
 ### 2.4. variable 变量类包
 该包包含变量声明类及其递推出的语法类型节点包。

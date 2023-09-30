@@ -2,14 +2,13 @@ package frontend.parser.parser.declarationParser.constantParser;
 
 import frontend.lexer.LexType;
 import frontend.lexer.Token;
-import frontend.lexer.TokenListIterator;
+import frontend.parser.TLIterator;
 import frontend.parser.struct.declaration.constant.constInitVal.ConstInitVal;
 import frontend.parser.struct.declaration.constant.constInitVal.ConstInitValMulti;
 
 import java.util.ArrayList;
 
 public class ConstInitValMultiParser {
-    private TokenListIterator iterator;
     /* ConstInitMulti Attributes */
     private Token leftBrace = null; // '{'
     private ConstInitVal first; // MAY exist
@@ -17,34 +16,33 @@ public class ConstInitValMultiParser {
     private ArrayList<ConstInitVal> constInitVals = new ArrayList<>(); // MAY exist
     private Token rightBrace = null; // '}'
 
-    public ConstInitValMultiParser(TokenListIterator iterator) {
-        this.iterator = iterator;
-    }
-
+    /**
+     * ConstInitValMulti -> '{' [ <ConstInitVal> { ',' <ConstInitVal> } ] '}'
+     * @return {@link ConstInitValMulti}
+     */
     public ConstInitValMulti parseConstInitValMulti() {
-        this.commas = new ArrayList<>();
-        this.constInitVals = new ArrayList<>();
-        this.leftBrace = this.iterator.readNextToken();
-        if (!this.leftBrace.getType().equals(LexType.LBRACE)) {
+        commas = new ArrayList<>();
+        constInitVals = new ArrayList<>();
+
+        leftBrace = TLIterator.readNextToken();
+        if (!leftBrace.getType().equals(LexType.LBRACE)) {
             System.out.println("EXPECT LBRACE HERE");
         }
-        Token token = this.iterator.readNextToken();
+        Token token = TLIterator.readNextToken();
         if (!token.getType().equals(LexType.RBRACE)) {
-            this.iterator.unReadToken(1);
-            ConstInitValParser constInitValParser = new ConstInitValParser(this.iterator);
-            this.first = constInitValParser.parseConstInitVal();
-            token = this.iterator.readNextToken();
+            TLIterator.unReadToken(1);
+            first = new ConstInitValParser().parseConstInitVal();
+            token = TLIterator.readNextToken();
             while (token.getType().equals(LexType.COMMA)) { // ','
-                this.commas.add(token);
-                this.constInitVals.add(constInitValParser.parseConstInitVal());
-                token = this.iterator.readNextToken();
+                commas.add(token);
+                constInitVals.add(new ConstInitValParser().parseConstInitVal());
+                token = TLIterator.readNextToken();
             }
-            this.iterator.unReadToken(1);
+            TLIterator.unReadToken(1);
         } else {
-            this.iterator.unReadToken(1);
+            TLIterator.unReadToken(1);
         }
-        this.rightBrace = this.iterator.readNextToken();
-        return new ConstInitValMulti(this.leftBrace,
-                this.first, this.commas, this.constInitVals, this.rightBrace);
+        rightBrace = TLIterator.readNextToken();
+        return new ConstInitValMulti(leftBrace, first, this.commas, constInitVals, rightBrace);
     }
 }

@@ -2,8 +2,7 @@ package frontend.parser.parser.declarationParser.variableParser;
 
 import frontend.lexer.LexType;
 import frontend.lexer.Token;
-import frontend.lexer.TokenListIterator;
-import frontend.parser.parser.declarationParser.variableParser.InitValParser;
+import frontend.parser.TLIterator;
 import frontend.parser.parser.expressionParser.ConstExpParser;
 import frontend.parser.parser.terminalParser.IdentParser;
 import frontend.parser.struct.declaration.variable.initVal.InitVal;
@@ -17,7 +16,6 @@ import frontend.parser.struct.terminal.Ident;
 import java.util.ArrayList;
 
 public class VarDefParser {
-    private TokenListIterator iterator;
     /* VarDef Attributes */
     private Ident ident = null;
     private ArrayList<Token> leftBrackets = new ArrayList<>();
@@ -29,37 +27,34 @@ public class VarDefParser {
     /* VarDefEle */
     private VarDefEle varDefEle = null;
 
-    public VarDefParser(TokenListIterator iterator) {
-        this.iterator = iterator;
-    }
-
+    /**
+     *  VarDef → Ident { '[' ConstExp ']' } // 包含普通变量、一维数组、二维数组定义
+     * | Ident { '[' ConstExp ']' } '=' InitVal
+     * @return {@link VarDef}
+     */
     public VarDef parseVarDef() {
-        this.leftBrackets = new ArrayList<>();
-        this.constExps = new ArrayList<>();
-        this.rightBrackets = new ArrayList<>();
-        IdentParser identParser = new IdentParser(this.iterator);
-        this.ident = identParser.parseIdent();
-        Token token = this.iterator.readNextToken();
+        leftBrackets = new ArrayList<>();
+        constExps = new ArrayList<>();
+        rightBrackets = new ArrayList<>();
+
+        ident = new IdentParser().parseIdent();
+        Token token = TLIterator.readNextToken();
         while (token.getType().equals(LexType.LBRACK)) {
-            this.leftBrackets.add(token);
-            ConstExpParser expParser = new ConstExpParser(this.iterator);
-            this.constExps.add(expParser.parseConstExp());
-            token = this.iterator.readNextToken();
-            this.rightBrackets.add(token);
-            token = this.iterator.readNextToken();
+            leftBrackets.add(token);
+            constExps.add(new ConstExpParser().parseConstExp());
+            token = TLIterator.readNextToken();
+            rightBrackets.add(token);
+            token = TLIterator.readNextToken();
         }
         if (token.getType().equals(LexType.ASSIGN)) { // '='
-            this.eq = token;
-            InitValParser initValParser = new InitValParser(this.iterator);
-            this.initVal = initValParser.parseInitVal();
-            this.varDefEle = new VarDefInit(this.ident, this.leftBrackets,
-                    this.constExps, this.rightBrackets, this.eq, this.initVal);
+            eq = token;
+            initVal = new InitValParser().parseInitVal();
+            varDefEle = new VarDefInit(ident, leftBrackets, constExps, rightBrackets, eq, initVal);
         } else {
             // token now is ';', need to backspace
-            this.iterator.unReadToken(1);
-            this.varDefEle = new VarDefNull(this.ident, this.leftBrackets,
-                    this.constExps, this.rightBrackets);
+            TLIterator.unReadToken(1);
+            varDefEle = new VarDefNull(ident, leftBrackets, constExps, rightBrackets);
         }
-        return new VarDef(this.varDefEle);
+        return new VarDef(varDefEle);
     }
 }

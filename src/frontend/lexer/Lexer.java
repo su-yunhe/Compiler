@@ -33,10 +33,7 @@ public class Lexer {
      * 当前字符串位置指针【行内列数】
      */
     private int curColumn;
-    /**
-     * 从源程序识别出的 token 列表
-     */
-    private TokenList tokenList;
+
 
     /**
      * 私有构造函数
@@ -47,7 +44,6 @@ public class Lexer {
         this.lines = new ArrayList<>();
         this.curLine = 0;
         this.curColumn = 0;
-        this.tokenList = new TokenList();
         source2Lines();
         tokenAnalyse();
     }
@@ -83,19 +79,6 @@ public class Lexer {
         return this.lines;
     }
 
-    /**
-     * 打印TokenList
-     * @return {@link String} 标准输出格式
-     */
-    public String printTokenList() {
-        return this.tokenList.toString();
-    }
-
-    public TokenList getTokenList() {
-        return this.tokenList;
-    }
-
-    /*************************************************************************/
 
     /**
      * token 分析
@@ -149,7 +132,7 @@ public class Lexer {
             String content = this.matchRegex(lexType.getPattern());
             if (!Objects.equals(content, "")) {
                 Token token = new Token(lexType, this.getCurrentLineNum(), content);
-                this.tokenList.addToken(token);
+                TokenList.addToken(token);
                 this.moveForward(content.length());
                 return;
             }

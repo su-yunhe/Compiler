@@ -2,14 +2,13 @@ package frontend.parser.parser.statementParser;
 
 import frontend.lexer.LexType;
 import frontend.lexer.Token;
-import frontend.lexer.TokenListIterator;
+import frontend.parser.TLIterator;
 import frontend.parser.parser.expressionParser.CondParser;
 import frontend.parser.struct.expression.Cond;
 import frontend.parser.struct.statement.stmt.Stmt;
 import frontend.parser.struct.statement.stmt.StmtCond;
 
 public class StmtCondParser {
-    private TokenListIterator iterator;
     /* StmtCond Attributes */
     private Token ifTK = null; // 'if'
     private Token leftParent = null; // '('
@@ -20,37 +19,29 @@ public class StmtCondParser {
     private Stmt elseStmt = null; // MAY exist else statement
     private StmtCond stmtCond = null;
 
-    public StmtCondParser(TokenListIterator iterator) {
-        this.iterator = iterator;
-    }
-
     public StmtCond parseStmtCond() {
-        this.ifTK = this.iterator.readNextToken();
-        if (!this.ifTK.getType().equals(LexType.IFTK)) {
+        ifTK = TLIterator.readNextToken();
+        if (!ifTK.getType().equals(LexType.IFTK)) {
             System.out.println("EXPECT IFTK IN STMTCONDPARSER");
         }
-        this.leftParent = this.iterator.readNextToken();
-        if (!this.leftParent.getType().equals(LexType.LPARENT)) {
+        leftParent = TLIterator.readNextToken();
+        if (!leftParent.getType().equals(LexType.LPARENT)) {
             System.out.println("EXPECT LEFTPARENT IN STMTCONDPARSER");
         }
-        CondParser condParser = new CondParser(this.iterator);
-        this.cond = condParser.parseCond();
-        this.rightParent = this.iterator.readNextToken();
-        if (!this.rightParent.getType().equals(LexType.RPARENT)) {
+        cond = new CondParser().parseCond();
+        rightParent = TLIterator.readNextToken();
+        if (!rightParent.getType().equals(LexType.RPARENT)) {
             System.out.println("EXPECT RPARENT IN STMTCONDPARSER");
         }
-        StmtParser stmtParser = new StmtParser(this.iterator);
-        this.ifStmt = stmtParser.parseStmt();
-        this.elseTk = this.iterator.readNextToken();
-        if (this.elseTk.getType().equals(LexType.ELSETK)) {
-            this.elseStmt = stmtParser.parseStmt();
-            this.stmtCond = new StmtCond(this.ifTK, this.leftParent,
-                    this.cond, this.rightParent, this.ifStmt, this.elseTk, this.elseStmt);
+        ifStmt = new StmtParser().parseStmt();
+        elseTk = TLIterator.readNextToken();
+        if (elseTk.getType().equals(LexType.ELSETK)) {
+            elseStmt = new StmtParser().parseStmt();
+            stmtCond = new StmtCond(ifTK, leftParent, cond, rightParent, ifStmt, elseTk, elseStmt);
         } else {
-            this.iterator.unReadToken(1);
-            this.stmtCond = new StmtCond(this.ifTK, this.leftParent,
-                    this.cond, this.rightParent, this.ifStmt);
+            TLIterator.unReadToken(1);
+            stmtCond = new StmtCond(ifTK, leftParent, cond, rightParent, ifStmt);
         }
-        return this.stmtCond;
+        return stmtCond;
     }
 }

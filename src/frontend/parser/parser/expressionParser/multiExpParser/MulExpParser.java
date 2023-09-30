@@ -2,7 +2,7 @@ package frontend.parser.parser.expressionParser.multiExpParser;
 
 import frontend.lexer.LexType;
 import frontend.lexer.Token;
-import frontend.lexer.TokenListIterator;
+import frontend.parser.TLIterator;
 import frontend.parser.parser.expressionParser.unaryExpParser.UnaryExpParser;
 import frontend.parser.struct.expression.multiExp.MulExp;
 import frontend.parser.struct.expression.unaryExp.UnaryExp;
@@ -10,35 +10,29 @@ import frontend.parser.struct.expression.unaryExp.UnaryExp;
 import java.util.ArrayList;
 
 public class MulExpParser {
-    private TokenListIterator iterator;
     /* MulExp Attributes */
     private UnaryExp first = null;
     private ArrayList<Token> operators = new ArrayList<>();
     private ArrayList<UnaryExp> operands = new ArrayList<>();
-
-    public MulExpParser(TokenListIterator iterator) {
-        this.iterator = iterator;
-    }
-
     /**
      * MulExp -> UnaryExp { ('*' | '/' | '%') UnaryExp }
      * @return {@link MulExp}
      */
     public MulExp parseMulExp() {
-        this.operators = new ArrayList<>();
-        this.operands = new ArrayList<>();
+        operators = new ArrayList<>();
+        operands = new ArrayList<>();
         /* UnaryExp */
-        UnaryExpParser unaryExpParser = new UnaryExpParser(this.iterator);
-        this.first = unaryExpParser.parseUnaryExp();
-        Token token = this.iterator.readNextToken();
+        first = new UnaryExpParser().parseUnaryExp();
+        Token token = TLIterator.readNextToken();
         while (token.getType().equals(LexType.MULT) ||
                 token.getType().equals(LexType.DIV) ||
                 token.getType().equals(LexType.MOD)) {
-            this.operators.add(token);
-            this.operands.add(unaryExpParser.parseUnaryExp());
-            token = this.iterator.readNextToken();
+            operators.add(token);
+            UnaryExp unaryExp = new UnaryExpParser().parseUnaryExp();
+            operands.add(unaryExp);
+            token = TLIterator.readNextToken();
         }
-        this.iterator.unReadToken(1);
-        return new MulExp(this.first, this.operators, this.operands);
+        TLIterator.unReadToken(1);
+        return new MulExp(first, operators, operands);
     }
 }

@@ -1,5 +1,6 @@
 import frontend.lexer.Lexer;
-import frontend.parser.parser.CompUnitParser;
+import frontend.lexer.TokenList;
+import frontend.parser.Parser;
 import frontend.parser.struct.CompUnit;
 
 import java.io.BufferedWriter;
@@ -40,9 +41,8 @@ public class Compiler {
              FileWriter fileWriter = new FileWriter(outputFileName);
              BufferedWriter writer = new BufferedWriter(fileWriter)) {
             Lexer lexer = Lexer.getInstance(fis);
-            // System.out.println(lexer.getTokenList());
-            CompUnitParser compUnitParser = new CompUnitParser(lexer.getTokenList());
-            CompUnit compUnit = compUnitParser.parseCompUnit();
+            Parser parser = new Parser();
+            CompUnit compUnit = parser.parseCompUnit();
             // 写入内容到文件
             if (isPrint) {
                 writer.write(compUnit.toString());

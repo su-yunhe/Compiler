@@ -2,42 +2,33 @@ package frontend.parser.parser.expressionParser.unaryExpParser;
 
 import frontend.lexer.LexType;
 import frontend.lexer.Token;
-import frontend.lexer.TokenListIterator;
+import frontend.parser.TLIterator;
 import frontend.parser.parser.expressionParser.primaryExpParser.PrimaryExpParser;
 import frontend.parser.struct.expression.unaryExp.UnaryExp;
 import frontend.parser.struct.expression.unaryExp.UnaryExpEle;
 
 public class UnaryExpParser {
-    private TokenListIterator iterator;
     /* UnaryExp Attributes */
     private UnaryExpEle unaryExpEle = null;
-
-    public UnaryExpParser(TokenListIterator iterator) {
-        this.iterator = iterator;
-    }
-
     /**
      * UnaryExp → UnaryExpEle = PrimaryExp | Ident '(' [FuncRParams] ')' | UnaryOp UnaryExp
      * @return {@link UnaryExp}
      */
     public UnaryExp parseUnaryExp() {
-        Token first = this.iterator.readNextToken();
-        Token second = this.iterator.readNextToken();
+        Token first = TLIterator.readNextToken();
+        Token second = TLIterator.readNextToken();
+        TLIterator.unReadToken(2);
         if (isIdentFirst(first, second)) {
             /* Ident '(' [FuncRParams] ')' */
-            this.iterator.unReadToken(2);
-            UnaryExpFuncParser unaryExpFuncParser = new UnaryExpFuncParser(this.iterator);
-            this.unaryExpEle = unaryExpFuncParser.parseUnaryFuncExp();
+            unaryExpEle = new UnaryExpFuncParser().parseUnaryFuncExp();
         } else if (isPrimaryExpFirst(first)) {
             /* PrimaryExp */
-            this.iterator.unReadToken(2);
-            PrimaryExpParser primaryExpParser = new PrimaryExpParser(this.iterator);
-            this.unaryExpEle = primaryExpParser.parsePrimaryExp();
+            unaryExpEle = new PrimaryExpParser().parsePrimaryExp();
         } else if (isUnaryFirst(first)) {
             /* UnaryOp UnaryExp */
-            this.iterator.unReadToken(2);
-            UnaryExpOpParser unaryExpOpParser = new UnaryExpOpParser(this.iterator);
-            this.unaryExpEle = unaryExpOpParser.parseUnaryExpOp();
+            unaryExpEle = new UnaryExpOpParser().parseUnaryExpOp();
+        } else {
+            System.out.println("ERROR: unexpected token in UnaryExpParser!");
         }
         return new UnaryExp(this.unaryExpEle);
     }

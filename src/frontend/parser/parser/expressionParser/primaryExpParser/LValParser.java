@@ -2,7 +2,7 @@ package frontend.parser.parser.expressionParser.primaryExpParser;
 
 import frontend.lexer.LexType;
 import frontend.lexer.Token;
-import frontend.lexer.TokenListIterator;
+import frontend.parser.TLIterator;
 import frontend.parser.parser.expressionParser.ExpParser;
 import frontend.parser.parser.terminalParser.IdentParser;
 import frontend.parser.struct.expression.Exp;
@@ -12,33 +12,31 @@ import frontend.parser.struct.terminal.Ident;
 import java.util.ArrayList;
 
 public class LValParser {
-    private TokenListIterator iterator;
     /* LVal Attributes */
     private Ident ident = null;
     private ArrayList<Token> leftBrackets = new ArrayList<>(); // '['
     private ArrayList<Exp> exps = new ArrayList<>();
     private ArrayList<Token> rightBrackets = new ArrayList<>();
 
-    public LValParser(TokenListIterator iterator) {
-        this.iterator = iterator;
-    }
-
+    /**
+     * LVal → Ident {'[' Exp ']'}
+     * @return {@link LVal}
+     */
     public LVal parseLVal() {
-        this.leftBrackets = new ArrayList<>();
-        this.exps = new ArrayList<>();
-        this.rightBrackets = new ArrayList<>();
-        IdentParser identParser = new IdentParser(this.iterator);
-        this.ident = identParser.parseIdent();
-        Token token = this.iterator.readNextToken();
+        leftBrackets = new ArrayList<>();
+        exps = new ArrayList<>();
+        rightBrackets = new ArrayList<>();
+
+        ident = new IdentParser().parseIdent();
+        Token token = TLIterator.readNextToken();
         while (token.getType().equals(LexType.LBRACK)) { // '['
-            this.leftBrackets.add(token);
-            ExpParser expParser = new ExpParser(this.iterator);
-            this.exps.add(expParser.parseExp());
-            token = this.iterator.readNextToken(); // ']'
-            this.rightBrackets.add(token);
-            token = this.iterator.readNextToken();
+            leftBrackets.add(token);
+            exps.add(new ExpParser().parseExp());
+            token = TLIterator.readNextToken(); // ']'
+            rightBrackets.add(token);
+            token = TLIterator.readNextToken();
         }
-        this.iterator.unReadToken(1);
-        return new LVal(this.ident, this.leftBrackets, this.exps, this.rightBrackets);
+        TLIterator.unReadToken(1);
+        return new LVal(ident, leftBrackets, exps, rightBrackets);
     }
 }

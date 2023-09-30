@@ -2,8 +2,7 @@ package frontend.parser.parser.functionParser;
 
 import frontend.lexer.LexType;
 import frontend.lexer.Token;
-import frontend.lexer.TokenListIterator;
-import frontend.parser.parser.FuncFParamsParser;
+import frontend.parser.TLIterator;
 import frontend.parser.parser.statementParser.BlockParser;
 import frontend.parser.parser.terminalParser.IdentParser;
 import frontend.parser.struct.function.FuncDef;
@@ -13,7 +12,6 @@ import frontend.parser.struct.statement.Block;
 import frontend.parser.struct.terminal.Ident;
 
 public class FuncDefParser {
-    private TokenListIterator iterator;
     /* FuncDef Attributes */
     private FuncType funcType = null;
     private Ident ident = null;
@@ -22,43 +20,32 @@ public class FuncDefParser {
     private Token rightParent = null; // ')'
     private Block block = null;
     private FuncDef funcDef = null;
-
-    public FuncDefParser(TokenListIterator iterator) {
-        this.iterator = iterator;
-    }
-
+    
     /**
      * FuncDef → FuncType Ident '(' [FuncFParams] ')' Block
      * @return {@link FuncDef}
      */
     public FuncDef parseFuncDef() {
         /* FuncType */
-        FuncTypeParser funcTypeParser = new FuncTypeParser(this.iterator);
-        this.funcType = funcTypeParser.parseFuncType();
+        funcType = new FuncTypeParser().parseFuncType();
         /* Ident */
-        IdentParser identParser = new IdentParser(this.iterator);
-        this.ident = identParser.parseIdent();
+        ident = new IdentParser().parseIdent();
         /* ( */
-        this.leftParent = this.iterator.readNextToken();
-        this.rightParent = this.iterator.readNextToken();
-        if (!this.rightParent.getType().equals(LexType.RPARENT)) {
+        leftParent = TLIterator.readNextToken();
+        rightParent = TLIterator.readNextToken();
+        if (!rightParent.getType().equals(LexType.RPARENT)) {
             /* FuncFParams */
-            this.iterator.unReadToken(1);
-            FuncFParamsParser funcFParamsParser = new FuncFParamsParser(this.iterator);
-            this.funcFParams = funcFParamsParser.parseFuncFParams();
+            TLIterator.unReadToken(1);
+            funcFParams = new FuncFParamsParser().parseFuncFParams();
             /* ) */
-            this.rightParent = this.iterator.readNextToken();
+            rightParent = TLIterator.readNextToken();
             /* Block */
-            BlockParser blockParser = new BlockParser(this.iterator);
-            this.block = blockParser.parseBlock();
-            this.funcDef = new FuncDef(this.funcType, this.ident, this.leftParent,
-                    this.funcFParams, this.rightParent, this.block);
+            block = new BlockParser().parseBlock();
+            funcDef = new FuncDef(funcType, ident, leftParent, funcFParams, rightParent, block);
         } else {
             /* Block */
-            BlockParser blockParser = new BlockParser(this.iterator);
-            this.block = blockParser.parseBlock();
-            this.funcDef = new FuncDef(this.funcType, this.ident, this.leftParent,
-                    this.rightParent, this.block);
+            block = new BlockParser().parseBlock();
+            funcDef = new FuncDef(funcType, ident, leftParent, rightParent, block);
         }
         return funcDef;
     }

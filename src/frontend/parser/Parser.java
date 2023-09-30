@@ -1,9 +1,7 @@
-package frontend.parser.parser;
+package frontend.parser;
 
 import frontend.lexer.LexType;
 import frontend.lexer.Token;
-import frontend.lexer.TokenList;
-import frontend.lexer.TokenListIterator;
 import frontend.parser.parser.declarationParser.DeclParser;
 import frontend.parser.parser.functionParser.FuncDefParser;
 import frontend.parser.parser.functionParser.MainFuncDefParser;
@@ -14,22 +12,16 @@ import frontend.parser.struct.function.MainFuncDef;
 
 import java.util.ArrayList;
 
-public class CompUnitParser {
-    private TokenList tokens;
-    private TokenListIterator iterator;
+public class Parser {
     /* CompUnit params */
     private ArrayList<Decl> decls;
     private ArrayList<FuncDef> funcDefs;
     private MainFuncDef mainFuncDef;
 
-    /* init CompUnitParser obj */
-    private void initCompUnitParser() {
-        this.iterator = new TokenListIterator(this.tokens);
-    }
 
-    public CompUnitParser(TokenList tokens) {
-        this.tokens = tokens;
-        initCompUnitParser();
+
+    public Parser() {
+        TLIterator.initTokenListIterator();
         this.decls = new ArrayList<>();
         this.funcDefs = new ArrayList<>();
         this.mainFuncDef = null;
@@ -44,7 +36,6 @@ public class CompUnitParser {
         parseFuncDefs();
         /* parse MainFuncDef */
         parseMainFuncDef();
-        System.out.println(1);
         return new CompUnit(this.decls, this.funcDefs, this.mainFuncDef);
     }
 
@@ -55,31 +46,29 @@ public class CompUnitParser {
      * 如果出现其他类型的声明语句，会退出解析过程。
      */
     private void parseDecls() {
-        Token first = this.iterator.readNextToken();
-        Token second = this.iterator.readNextToken();
-        while (this.iterator.hasNext()) {
-            Token third = this.iterator.readNextToken();
-            if (third.getType().equals(LexType.LPARENT)) {
-                this.iterator.unReadToken(3);
-                return;
-            } else {
-                this.iterator.unReadToken(1);
-            }
+        Token first = TLIterator.readNextToken();
+        Token second = TLIterator.readNextToken();
+        while (TLIterator.hasNext()) {
             if ((first.getType().equals(LexType.CONSTTK) &&
                     second.getType().equals(LexType.INTTK)) ||
                     (first.getType().equals(LexType.INTTK) &&
                             second.getType().equals(LexType.IDENFR))) {
-                /* first -> const && second -> int */
-                /* first -> int && second -> IDENFR */
-                this.iterator.unReadToken(2);
-                DeclParser declParser = new DeclParser(this.iterator);
+                /* const int || int IDENFR */
+                Token third = TLIterator.readNextToken();
+                if (third.getType().equals(LexType.LPARENT)) {
+                    /* int main () */
+                    TLIterator.unReadToken(3);
+                    return;
+                }
+                TLIterator.unReadToken(3);
+                DeclParser declParser = new DeclParser();
                 this.decls.add(declParser.parseDecl());
             } else {
-                this.iterator.unReadToken(2);
-                break;
+                TLIterator.unReadToken(2);
+                return;
             }
-            first = this.iterator.readNextToken();
-            second = this.iterator.readNextToken();
+            first = TLIterator.readNextToken();
+            second = TLIterator.readNextToken();
         }
     }
 
@@ -87,22 +76,22 @@ public class CompUnitParser {
      * first 的类型是 INTTK 或 VOIDTK，second 的类型是 IDENFR
      */
     private void parseFuncDefs() {
-        Token first = this.iterator.readNextToken();
-        Token second = this.iterator.readNextToken();
-        while (this.iterator.hasNext()) {
+        Token first = TLIterator.readNextToken();
+        Token second = TLIterator.readNextToken();
+        while (TLIterator.hasNext()) {
             if ((first.getType().equals(LexType.INTTK) ||
                     first.getType().equals(LexType.VOIDTK)) &&
                     second.getType().equals(LexType.IDENFR)) {
-                /* first -> int/void && second -> IDENFR */
-                this.iterator.unReadToken(2);
-                FuncDefParser funcDefParser = new FuncDefParser(this.iterator);
+                /* int IDENFR || void IDENFR */
+                TLIterator.unReadToken(2);
+                FuncDefParser funcDefParser = new FuncDefParser();
                 this.funcDefs.add(funcDefParser.parseFuncDef());
             } else {
-                this.iterator.unReadToken(2);
-                break;
+                TLIterator.unReadToken(2);
+                return;
             }
-            first = this.iterator.readNextToken();
-            second = this.iterator.readNextToken();
+            first = TLIterator.readNextToken();
+            second = TLIterator.readNextToken();
         }
     }
 
@@ -110,7 +99,7 @@ public class CompUnitParser {
      * 一定进入
      */
     private void parseMainFuncDef() {
-        MainFuncDefParser mainFuncDefParser = new MainFuncDefParser(this.iterator);
+        MainFuncDefParser mainFuncDefParser = new MainFuncDefParser();
         this.mainFuncDef = mainFuncDefParser.parseMainFuncDef();
     }
 }

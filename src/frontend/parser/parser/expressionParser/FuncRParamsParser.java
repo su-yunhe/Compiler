@@ -2,39 +2,32 @@ package frontend.parser.parser.expressionParser;
 
 import frontend.lexer.LexType;
 import frontend.lexer.Token;
-import frontend.lexer.TokenListIterator;
+import frontend.parser.TLIterator;
 import frontend.parser.struct.expression.Exp;
 import frontend.parser.struct.expression.FuncRParams;
 
 import java.util.ArrayList;
 
 public class FuncRParamsParser {
-    private TokenListIterator iterator;
     /* FuncRParams Attributes */
     private Exp first = null;
     private ArrayList<Token> commas = new ArrayList<>();
     private ArrayList<Exp> exps = new ArrayList<>();
-
-    public FuncRParamsParser(TokenListIterator iterator) {
-        this.iterator = iterator;
-    }
-
     /**
      * FuncRParams → Exp { ',' Exp }
      * @return {@link FuncRParams}
      */
     public FuncRParams parseFuncRParams() {
-        this.commas = new ArrayList<>();
-        this.exps = new ArrayList<>();
-        ExpParser expParser = new ExpParser(this.iterator);
-        first = expParser.parseExp();
-        Token token = this.iterator.readNextToken();
+        commas = new ArrayList<>();
+        exps = new ArrayList<>();
+        first = new ExpParser().parseExp();
+        Token token = TLIterator.readNextToken();
         while (token.getType().equals(LexType.COMMA)) { // ','
-            this.commas.add(token);
-            this.exps.add(expParser.parseExp());
-            token = this.iterator.readNextToken();
+            commas.add(token);
+            exps.add(new ExpParser().parseExp());
+            token = TLIterator.readNextToken();
         }
-        this.iterator.unReadToken(1);
-        return new FuncRParams(this.first, this.commas, this.exps);
+        TLIterator.unReadToken(1);
+        return new FuncRParams(first, commas, exps);
     }
 }
