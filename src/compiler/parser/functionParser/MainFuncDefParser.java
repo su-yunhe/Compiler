@@ -4,6 +4,7 @@ import enums.ReturnType;
 import enums.SymbolType;
 import enums.LexType;
 import compiler.parser.statementParser.BlockParser;
+import struct.symbol.symbol.SymbolFunc;
 import struct.symbolTable.STStack;
 import struct.token.Token;
 import utils.TLIterator;
@@ -11,7 +12,6 @@ import struct.syntaxTree.function.MainFuncDef;
 import struct.syntaxTree.statement.Block;
 import struct.syntaxTree.terminal.Ident;
 import utils.ErrorUtils;
-import struct.symbol.SymbolFunc;
 
 import java.util.ArrayList;
 

@@ -20,6 +20,7 @@ public class FuncRParamsParser {
     public FuncRParams parseFuncRParams() {
         commas = new ArrayList<>();
         exps = new ArrayList<>();
+
         first = new ExpParser().parseExp();
         Token token = TLIterator.readNext();
         while (token.getType().equals(LexType.COMMA)) { // ','

@@ -9,6 +9,7 @@ import struct.syntaxTree.declaration.Decl;
 import struct.syntaxTree.declaration.DeclEle;
 
 public class DeclParser {
+    private DeclEle declEle = null;
     
     /**
      * CONSTTK INTTK || INTTK
@@ -17,7 +18,7 @@ public class DeclParser {
     public Decl parseDecl() {
         Token first = TLIterator.readNext();
         TLIterator.unRead(1);
-        DeclEle declEle = null;
+
         if (first.getType().equals(LexType.CONSTTK)) {
             /* const INTTK -> */
             declEle = new ConstDeclParser().parseConstDecl();

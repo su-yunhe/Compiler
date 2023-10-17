@@ -2,6 +2,8 @@ package compiler.parser.expressionParser.unaryExpParser;
 
 import enums.LexType;
 import compiler.parser.expressionParser.FuncRParamsParser;
+import struct.symbol.symbol.Symbol;
+import struct.symbol.symbol.SymbolFunc;
 import struct.token.Token;
 import utils.TLIterator;
 import compiler.parser.terminalParser.IdentParser;
@@ -11,19 +13,17 @@ import struct.syntaxTree.expression.unaryExp.UnaryExpFunc;
 import struct.syntaxTree.terminal.Ident;
 import utils.ErrorUtils;
 import struct.symbolTable.STStack;
-import struct.symbol.Symbol;
-import struct.symbol.SymbolFunc;
 
 import java.util.ArrayList;
 
 public class UnaryExpFuncParser {
     /* UnaryExpFunc Attributes */
     private Ident ident = null;
-    private Token leftParent; // '('
+    private Token leftParent = null; // '('
     private FuncRParams funcRParams = null;
-    private Token rightParent; // ')'
+    private Token rightParent = null; // ')'
     private UnaryExpFunc unaryExpFunc = null;
-    private int dimension;
+
     /**
      * UnaryExpFunc = Ident '(' [FuncRParams] ')'
      * @return {@link UnaryExpFunc}
@@ -31,7 +31,6 @@ public class UnaryExpFuncParser {
     public UnaryExpFunc parseUnaryFuncExp() {
         /* Ident */
         ident = new IdentParser().parseIdent();
-        System.out.println(ident.getName());
         // TODO: 处理c类错误：未定义名字 & 获取维数
         handleCError(ident);
         /* '(' */

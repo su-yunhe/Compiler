@@ -18,13 +18,13 @@ public class UnaryExpParser {
         Token first = TLIterator.readNext();
         Token second = TLIterator.readNext();
         TLIterator.unRead(2);
-        if (isIdentFirst(first, second)) {
+        if (isUnaryExpFuncFirst(first, second)) {
             /* Ident '(' [FuncRParams] ')' */
             unaryExpEle = new UnaryExpFuncParser().parseUnaryFuncExp();
         } else if (isPrimaryExpFirst(first)) {
             /* PrimaryExp */
             unaryExpEle = new PrimaryExpParser().parsePrimaryExp();
-        } else if (isUnaryFirst(first)) {
+        } else if (isUnaryExpOpFirst(first)) {
             /* UnaryOp UnaryExp */
             unaryExpEle = new UnaryExpOpParser().parseUnaryExpOp();
         } else {
@@ -50,7 +50,7 @@ public class UnaryExpParser {
      * @param second FIRST
      * @return boolean
      */
-    private boolean isIdentFirst(Token first, Token second) {
+    private boolean isUnaryExpFuncFirst(Token first, Token second) {
         return first.getType().equals(LexType.IDENFR) &&
                 second.getType().equals(LexType.LPARENT);
     }
@@ -60,7 +60,7 @@ public class UnaryExpParser {
      * @param first FIRST
      * @return boolean
      */
-    private boolean isUnaryFirst(Token first) {
+    private boolean isUnaryExpOpFirst(Token first) {
         return first.getType().equals(LexType.PLUS) ||
                 first.getType().equals(LexType.MINU) ||
                 first.getType().equals(LexType.NOT);

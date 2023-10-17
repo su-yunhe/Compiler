@@ -14,8 +14,9 @@ public class EqExpParser {
     private ArrayList<Token> operators = new ArrayList<>();
     private ArrayList<RelExp> operands = new ArrayList<>();
     public EqExp parseEqExp() {
-        operands = new ArrayList<>();
         operators = new ArrayList<>();
+        operands = new ArrayList<>();
+
         first = new RelExpParser().parseRelExp();
         Token token = TLIterator.readNext();
         while (token.getType().equals(LexType.EQL) || // '=='

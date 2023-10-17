@@ -7,7 +7,7 @@ import struct.syntaxTree.terminal.Ident;
 
 public class IdentParser {
     /* Ident Attribute */
-    private Token token; // ident
+    private Token token = null; // ident
     public Ident parseIdent() {
         token = TLIterator.readNext();
         if (!token.getType().equals(LexType.IDENFR)) {

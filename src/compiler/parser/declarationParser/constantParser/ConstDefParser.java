@@ -1,6 +1,10 @@
 package compiler.parser.declarationParser.constantParser;
 
 import enums.LexType;
+import struct.symbol.symbol.Symbol;
+import struct.symbol.symbol.SymbolCon;
+import struct.symbol.symbol.SymbolCon1;
+import struct.symbol.symbol.SymbolCon2;
 import struct.token.Token;
 import utils.TLIterator;
 import compiler.parser.expressionParser.ConstExpParser;
@@ -11,11 +15,7 @@ import struct.syntaxTree.expression.ConstExp;
 import struct.syntaxTree.terminal.Ident;
 import utils.ErrorUtils;
 import struct.symbolTable.STStack;
-import struct.symbol.Symbol;
-import struct.symbol.SymbolCon;
 import enums.SymbolType;
-import struct.symbol.SymbolCon1;
-import struct.symbol.SymbolCon2;
 
 import java.util.ArrayList;
 
@@ -24,8 +24,8 @@ public class ConstDefParser {
     private ArrayList<Token> leftBrackets = new ArrayList<>();
     private ArrayList<ConstExp> constExps = new ArrayList<>();
     private ArrayList<Token> rightBrackets = new ArrayList<>();
-    private Token eq; // =
-    private ConstInitVal constInitVal;
+    private Token eq = null; // =
+    private ConstInitVal constInitVal = null;
     private boolean isDefCorrect = true;
 
     /**
@@ -36,6 +36,7 @@ public class ConstDefParser {
         leftBrackets = new ArrayList<>();
         constExps = new ArrayList<>();
         rightBrackets = new ArrayList<>();
+
         ident = new IdentParser().parseIdent();
         Token token = TLIterator.readNext();
         while (token.getType().equals(LexType.LBRACK)) {

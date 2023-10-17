@@ -1,10 +1,10 @@
 package struct.syntaxTree.function;
 
+import struct.symbol.symbol.Symbol;
 import struct.token.Token;
 import struct.syntaxTree.declaration.BType;
 import struct.syntaxTree.expression.ConstExp;
 import struct.syntaxTree.terminal.Ident;
-import struct.symbol.Symbol;
 
 import java.util.ArrayList;
 

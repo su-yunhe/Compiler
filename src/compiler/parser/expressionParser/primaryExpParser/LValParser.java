@@ -1,6 +1,7 @@
 package compiler.parser.expressionParser.primaryExpParser;
 
 import enums.LexType;
+import struct.symbol.symbol.Symbol;
 import struct.token.Token;
 import utils.TLIterator;
 import compiler.parser.expressionParser.ExpParser;
@@ -10,7 +11,6 @@ import struct.syntaxTree.expression.primaryExp.LVal;
 import struct.syntaxTree.terminal.Ident;
 import utils.ErrorUtils;
 import struct.symbolTable.STStack;
-import struct.symbol.Symbol;
 
 import java.util.ArrayList;
 
@@ -29,6 +29,7 @@ public class LValParser {
         leftBrackets = new ArrayList<>();
         exps = new ArrayList<>();
         rightBrackets = new ArrayList<>();
+
         ident = new IdentParser().parseIdent();
         // TODO: 处理 c 类错误：使用了未定义的标识符
         handleCError(ident);

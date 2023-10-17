@@ -14,14 +14,14 @@ public class LAndExpParser {
     private ArrayList<Token> operators = new ArrayList<>();
     private ArrayList<EqExp> operands = new ArrayList<>();
     public LAndExp parseLAndExp() {
-        operands = new ArrayList<>();
         operators = new ArrayList<>();
-        EqExpParser eqExpParser = new EqExpParser();
-        first = eqExpParser.parseEqExp();
+        operands = new ArrayList<>();
+
+        first = new EqExpParser().parseEqExp();
         Token token = TLIterator.readNext();
         while (token.getType().equals(LexType.AND)) { // '&&'
             operators.add(token);
-            operands.add(eqExpParser.parseEqExp());
+            operands.add(new EqExpParser().parseEqExp());
             token = TLIterator.readNext();
         }
         TLIterator.unRead(1);

@@ -16,7 +16,7 @@ public class InitValParser {
     private InitVal first = null;
     private ArrayList<Token> commas = new ArrayList<>(); // ','
     private ArrayList<InitVal> initVals = new ArrayList<>();
-    private Token rightBrace; // '}'
+    private Token rightBrace = null; // '}'
     private InitValEle initValEle = null;
 
     /**

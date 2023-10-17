@@ -13,8 +13,7 @@ public class StmtExpParser {
     private Exp exp = null;
     private Token semicn = null; // ';'
     public StmtExp parseStmtExp() {
-        ExpParser expParser = new ExpParser();
-        exp = expParser.parseExp();
+        exp = new ExpParser().parseExp();
         semicn = TLIterator.readNext();
         // TODO: 处理i类错误：缺失`;`
         handleIError();

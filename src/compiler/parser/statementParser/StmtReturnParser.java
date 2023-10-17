@@ -10,16 +10,15 @@ import utils.ErrorUtils;
 
 public class StmtReturnParser {
     /* StmtPrint Attributes */
-    private Token returnTk; // 'return'
-    private Exp exp;
-    private Token semicn; // ';'
+    private Token returnTk = null; // 'return'
+    private Exp exp = null;
+    private Token semicn = null; // ';'
     private StmtReturn stmtReturn = null;
     public StmtReturn parseStmtReturn() {
         returnTk = TLIterator.readNext();
         if (!returnTk.getType().equals(LexType.RETURNTK)) {
             System.out.println("EXPECT RETURNTK IN STMTRETURNPARSER");
         }
-        ExpParser expParser = new ExpParser();
         semicn = TLIterator.readNext();
         if (semicn.getType().equals(LexType.SEMICN)) {
             stmtReturn = new StmtReturn(returnTk, semicn);
@@ -30,7 +29,7 @@ public class StmtReturnParser {
                 stmtReturn = new StmtReturn(returnTk, semicn);
             } else {
                 TLIterator.unRead(1);
-                exp = expParser.parseExp();
+                exp = new ExpParser().parseExp();
                 semicn = TLIterator.readNext();
                 // TODO: 处理i类错误：缺失`;`【int】
                 handleIErrorInt();

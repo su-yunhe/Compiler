@@ -3,6 +3,8 @@ package compiler.parser.functionParser;
 import enums.LexType;
 import compiler.parser.statementParser.BlockParser;
 import enums.ReturnType;
+import struct.symbol.symbol.Symbol;
+import struct.symbol.symbol.SymbolFunc;
 import struct.syntaxTree.statement.BlockItem;
 import struct.syntaxTree.statement.stmt.Stmt;
 import struct.syntaxTree.statement.stmt.StmtReturn;
@@ -16,8 +18,6 @@ import struct.syntaxTree.statement.Block;
 import struct.syntaxTree.terminal.Ident;
 import utils.ErrorUtils;
 import struct.symbolTable.STStack;
-import struct.symbol.Symbol;
-import struct.symbol.SymbolFunc;
 import enums.SymbolType;
 
 import java.util.ArrayList;
@@ -27,7 +27,7 @@ public class FuncDefParser {
     private FuncType funcType = null;
     private Ident ident = null;
     private Token leftParent = null; // '('
-    private FuncFParams funcFParams; // MAY exist
+    private FuncFParams funcFParams = null; // MAY exist
     private Token rightParent = null; // ')'
     private Block block = null;
     private FuncDef funcDef = null;
@@ -76,12 +76,9 @@ public class FuncDefParser {
                 // TODO: 将函数定义中的形参加入 SymbolFunc 的形参列表中
                 setPmtList(funcFParams, symbolFunc);
                 block = new BlockParser().parseBlock();
-
                 funcDef = new FuncDef(funcType, ident, leftParent, funcFParams, rightParent, block);
             }
         }
-
-        System.out.println(STStack.STStackToString());
         // TODO: 处理 f 类错误：无返回值的函数存在不匹配的return语句
         handleFError(block);
         // TODO: 处理 g 类错误：缺失有返回值的 return 语句
@@ -124,7 +121,6 @@ public class FuncDefParser {
             symbols = funcFParams.getSymbols();
         }
         symbolFunc.setValue(symbols);
-
     }
 
     /**

@@ -16,23 +16,21 @@ import java.util.ArrayList;
 
 public class Parser {
     /* CompUnit params */
-    private ArrayList<Decl> decls;
-    private ArrayList<FuncDef> funcDefs;
-    private MainFuncDef mainFuncDef;
+    private ArrayList<Decl> decls = new ArrayList<>();
+    private ArrayList<FuncDef> funcDefs = new ArrayList<>();
+    private MainFuncDef mainFuncDef = null;
 
 
     public Parser() {
         TLIterator.initTokenListIterator();
         /* 初始化栈式符号表 */
         STStack.initSTStack();
-        decls = new ArrayList<>();
-        funcDefs = new ArrayList<>();
-        mainFuncDef = null;
     }
 
     public CompUnit parseCompUnit() {
         decls = new ArrayList<>();
         funcDefs = new ArrayList<>();
+
         /* parse decls */
         parseDecls();
         /* parse FuncDefs */
@@ -64,8 +62,7 @@ public class Parser {
                     return;
                 }
                 TLIterator.unRead(3);
-                DeclParser declParser = new DeclParser();
-                this.decls.add(declParser.parseDecl());
+                decls.add(new DeclParser().parseDecl());
             } else {
                 TLIterator.unRead(2);
                 return;
@@ -87,8 +84,7 @@ public class Parser {
                     second.getType().equals(LexType.IDENFR)) {
                 /* int IDENFR || void IDENFR */
                 TLIterator.unRead(2);
-                FuncDefParser funcDefParser = new FuncDefParser();
-                funcDefs.add(funcDefParser.parseFuncDef());
+                funcDefs.add(new FuncDefParser().parseFuncDef());
             } else {
                 TLIterator.unRead(2);
                 return;
@@ -102,7 +98,6 @@ public class Parser {
      * 一定进入
      */
     private void parseMainFuncDef() {
-        MainFuncDefParser mainFuncDefParser = new MainFuncDefParser();
-        mainFuncDef = mainFuncDefParser.parseMainFuncDef();
+        mainFuncDef = new MainFuncDefParser().parseMainFuncDef();
     }
 }

@@ -9,7 +9,7 @@ import struct.syntaxTree.declaration.constant.constInitVal.ConstInitValEle;
 
 public class ConstInitValParser {
     /* ConstInitVal Attribute */
-    private ConstInitValEle constInitValEle;
+    private ConstInitValEle constInitValEle = null;
 
     /**
      * ConstInitVal → ConstInitEle = ConstExp | '{' [ ConstInitVal { ',' ConstInitVal } ] '}'

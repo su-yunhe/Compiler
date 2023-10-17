@@ -22,6 +22,7 @@ public class ConstDeclParser {
     public ConstDecl parseConstDecl() {
         commas = new ArrayList<>();
         constDefs = new ArrayList<>();
+
         Token token = TLIterator.readNext(); // const
         if (token.getType().equals(LexType.CONSTTK)) {
             constTk = token;

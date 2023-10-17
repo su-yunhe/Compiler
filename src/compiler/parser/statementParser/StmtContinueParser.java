@@ -9,9 +9,9 @@ import struct.symbolTable.STStack;
 
 public class StmtContinueParser {
     /* StmtContinue Attributes */
-    private Token continueTk; // 'continue'
+    private Token continueTk = null; // 'continue'
     // TODO: 处理 m 类错误：在非循环块中使用 break 语句
-    private Token semicn; // ';'
+    private Token semicn = null; // ';'
     public StmtContinue parseStmtContinue() {
         continueTk = TLIterator.readNext();
         handleMError(continueTk);

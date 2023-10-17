@@ -1,8 +1,8 @@
 package struct.syntaxTree.terminal;
 
 import enums.LexType;
+import struct.symbol.symbol.Symbol;
 import struct.token.Token;
-import struct.symbol.Symbol;
 
 /**
  * 标识符 Identifier

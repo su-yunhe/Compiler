@@ -19,14 +19,15 @@ public class BlockParser {
      * @return {@link Block}
      */
     public Block parseBlock() {
+        blockItems = new ArrayList<>();
+
         /* '{' */
         leftBrace = TLIterator.readNext();
-        BlockItemParser blockItemParser = new BlockItemParser();
         Token token = TLIterator.readNext();
         while (!token.getType().equals(LexType.RBRACE)) {
             /* { BlockItem } */
             TLIterator.unRead(1);
-            blockItems.add(blockItemParser.parseBlockItem());
+            blockItems.add(new BlockItemParser().parseBlockItem());
             token = TLIterator.readNext();
         }
         /* '}' */

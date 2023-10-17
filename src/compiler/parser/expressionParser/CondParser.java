@@ -5,9 +5,9 @@ import struct.syntaxTree.expression.Cond;
 import struct.syntaxTree.expression.multiExp.LOrExp;
 
 public class CondParser {
+    private LOrExp lorExp = null;
     public Cond parseCond() {
-        LOrExpParser lorExpParser = new LOrExpParser();
-        LOrExp lorExp = lorExpParser.parseLOrExp();
+        lorExp = new LOrExpParser().parseLOrExp();
         return new Cond(lorExp);
     }
 }

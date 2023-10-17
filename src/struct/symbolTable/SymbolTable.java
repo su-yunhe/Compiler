@@ -1,6 +1,6 @@
 package struct.symbolTable;
 
-import struct.symbol.Symbol;
+import struct.symbol.symbol.Symbol;
 
 import java.util.ArrayList;
 import java.util.Collections;

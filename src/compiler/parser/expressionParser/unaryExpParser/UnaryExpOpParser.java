@@ -6,8 +6,8 @@ import struct.syntaxTree.expression.unaryExp.UnaryOp;
 
 public class UnaryExpOpParser {
     /* UnaryExpOp Attributes */
-    private UnaryOp unaryOp;
-    private UnaryExp unaryExp;
+    private UnaryOp unaryOp = null;
+    private UnaryExp unaryExp = null;
 
     /**
      * UnaryExpOp = UnaryOp UnaryExp

@@ -14,9 +14,9 @@ import enums.SymbolType;
 public class StmtAssignParser {
     /* StmtAssign Attributes */
     private LVal lval = null;
-    private Token eq; // '='
-    private Exp exp;
-    private Token semicn; // ';'
+    private Token eq = null; // '='
+    private Exp exp = null;
+    private Token semicn = null; // ';'
     
     /**
      * StmtAssign = LVal '=' Exp ';'

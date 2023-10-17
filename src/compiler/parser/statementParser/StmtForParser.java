@@ -61,6 +61,7 @@ public class StmtForParser {
         STStack.pushSTFor();
         /* Stmt */
         stmt = new StmtParser().parseStmt();
+
         // TODO: 弹出循环体的符号表
         STStack.popST();
         return new StmtFor(forTk, leftParent, forStmt1, semiTk1, cond, semiTk2, forStmt2, rightParent, stmt);

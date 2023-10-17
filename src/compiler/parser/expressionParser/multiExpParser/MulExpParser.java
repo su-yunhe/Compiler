@@ -21,6 +21,7 @@ public class MulExpParser {
     public MulExp parseMulExp() {
         operators = new ArrayList<>();
         operands = new ArrayList<>();
+
         /* UnaryExp */
         first = new UnaryExpParser().parseUnaryExp();
         Token token = TLIterator.readNext();
@@ -28,8 +29,7 @@ public class MulExpParser {
                 token.getType().equals(LexType.DIV) ||
                 token.getType().equals(LexType.MOD)) {
             operators.add(token);
-            UnaryExp unaryExp = new UnaryExpParser().parseUnaryExp();
-            operands.add(unaryExp);
+            operands.add(new UnaryExpParser().parseUnaryExp());
             token = TLIterator.readNext();
         }
         TLIterator.unRead(1);

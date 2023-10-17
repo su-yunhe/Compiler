@@ -7,7 +7,7 @@ import struct.syntaxTree.expression.primaryExp.PrimaryExp;
 import struct.syntaxTree.expression.primaryExp.PrimaryExpEle;
 
 public class PrimaryExpParser {
-    private PrimaryExpEle primaryExpEle;
+    private PrimaryExpEle primaryExpEle = null;
 
     /**
      * PrimaryExp -> PriMaryExpEle = '(' Exp ')' | LVal | Number

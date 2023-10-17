@@ -18,16 +18,16 @@ public class AddExpParser {
      * @return {@link AddExp}
      */
     public AddExp parseAddExp() {
-        operands = new ArrayList<>();
         operators = new ArrayList<>();
+        operands = new ArrayList<>();
+
         /* MulExp */
         first = new MulExpParser().parseMulExp();
         Token token = TLIterator.readNext();
         while (token.getType().equals(LexType.PLUS) ||
                 token.getType().equals(LexType.MINU)) { // + -
             operators.add(token);
-            MulExp mulExp = new MulExpParser().parseMulExp();
-            operands.add(mulExp);
+            operands.add(new MulExpParser().parseMulExp());
             token = TLIterator.readNext();
         }
         TLIterator.unRead(1);

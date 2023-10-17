@@ -1,7 +1,7 @@
 package struct.syntaxTree.function;
 
+import struct.symbol.symbol.Symbol;
 import struct.token.Token;
-import struct.symbol.Symbol;
 
 import java.util.ArrayList;
 

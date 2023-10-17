@@ -1,6 +1,10 @@
 package compiler.parser.functionParser;
 
 import enums.LexType;
+import struct.symbol.symbol.Symbol;
+import struct.symbol.symbol.SymbolVar;
+import struct.symbol.symbol.SymbolVar1;
+import struct.symbol.symbol.SymbolVar2;
 import struct.token.Token;
 import utils.TLIterator;
 import compiler.parser.declarationParser.constantParser.BTypeParser;
@@ -36,6 +40,7 @@ public class FuncFParamParser {
         leftBrackets = new ArrayList<>();
         constExps = new ArrayList<>();
         rightBrackets = new ArrayList<>();
+
         /* BType */
         btype = new BTypeParser().parseBtype();
         /* Ident */

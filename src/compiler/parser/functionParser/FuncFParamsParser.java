@@ -21,13 +21,13 @@ public class FuncFParamsParser {
     public FuncFParams parseFuncFParams() {
         commas = new ArrayList<>();
         funcFParams = new ArrayList<>();
+
         /* FuncFParam */
-        FuncFParamParser funcFParamParser = new FuncFParamParser();
-        first = funcFParamParser.parseFuncFParam();
+        first = new FuncFParamParser().parseFuncFParam();
         Token token = TLIterator.readNext();
         while (token.getType().equals(LexType.COMMA)) {
             commas.add(token);
-            funcFParams.add(funcFParamParser.parseFuncFParam());
+            funcFParams.add(new FuncFParamParser().parseFuncFParam());
             token = TLIterator.readNext();
         }
         TLIterator.unRead(1);

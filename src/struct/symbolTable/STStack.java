@@ -1,7 +1,7 @@
 package struct.symbolTable;
 
 
-import struct.symbol.Symbol;
+import struct.symbol.symbol.Symbol;
 
 import java.util.ArrayList;
 import java.util.ListIterator;
@@ -21,7 +21,9 @@ public class STStack {
      * 向栈式符号表中压入符号表
      */
     public static void pushST() {
-        symbolTables.add(new SymbolTable());
+        SymbolTable symbolTable = new SymbolTable();
+        symbolTable.setCycleDepth(getCurrentTable().getCycleDepth());
+        symbolTables.add(symbolTable);
     }
 
     /**

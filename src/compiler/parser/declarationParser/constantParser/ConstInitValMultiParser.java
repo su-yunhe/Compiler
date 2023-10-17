@@ -11,7 +11,7 @@ import java.util.ArrayList;
 public class ConstInitValMultiParser {
     /* ConstInitMulti Attributes */
     private Token leftBrace = null; // '{'
-    private ConstInitVal first; // MAY exist
+    private ConstInitVal first = null; // MAY exist
     private ArrayList<Token> commas = new ArrayList<>(); // MAY exist
     private ArrayList<ConstInitVal> constInitVals = new ArrayList<>(); // MAY exist
     private Token rightBrace = null; // '}'
@@ -43,6 +43,6 @@ public class ConstInitValMultiParser {
             TLIterator.unRead(1);
         }
         rightBrace = TLIterator.readNext();
-        return new ConstInitValMulti(leftBrace, first, this.commas, constInitVals, rightBrace);
+        return new ConstInitValMulti(leftBrace, first, commas, constInitVals, rightBrace);
     }
 }

@@ -13,16 +13,14 @@ import java.util.ArrayList;
 
 public class StmtPrintfParser {
     /* StmtPrint Attributes */
-    private Token printf; // 'printf'
-    private Token leftParent; // '('
-    private FormatString formatString;
+    private Token printf = null; // 'printf'
+    private Token leftParent = null; // '('
+    private FormatString formatString = null;
     private ArrayList<Token> commmas = new ArrayList<>(); // ','
     private ArrayList<Exp> exps = new ArrayList<>();
-    private Token rightParent; // ')'
-    private Token semicn; // ';'
+    private Token rightParent = null; // ')'
+    private Token semicn = null; // ';'
     public StmtPrintf parseStmtPrint() {
-        commmas = new ArrayList<>();
-        exps = new ArrayList<>();
         printf = TLIterator.readNext();
         if (!printf.getType().equals(LexType.PRINTFTK)) {
             System.out.println("EXPEXT PRINTF IN STMTPRINTFPARSER");
@@ -37,8 +35,7 @@ public class StmtPrintfParser {
         Token token = TLIterator.readNext();
         while (token.getType().equals(LexType.COMMA)) {
             commmas.add(token);
-            ExpParser expParser = new ExpParser();
-            exps.add(expParser.parseExp());
+            exps.add(new ExpParser().parseExp());
             token = TLIterator.readNext();
         }
         rightParent = token;

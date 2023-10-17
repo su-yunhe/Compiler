@@ -9,13 +9,13 @@ import struct.symbolTable.STStack;
 
 public class StmtBreakParser {
     /* StmtBreak Attributes */
-    private Token breakTk; // 'break'
-    private Token semicn; // ';'
+    private Token breakTk = null; // 'break'
+    private Token semicn = null; // ';'
     public StmtBreak parseStmtBreak() {
         breakTk = TLIterator.readNext();
         // TODO: 处理 m 类错误：在非循环块中使用 break 语句
         handleMError(breakTk);
-        if (!this.breakTk.getType().equals(LexType.BREAKTK)) {
+        if (!breakTk.getType().equals(LexType.BREAKTK)) {
             System.out.println("EXPECT BREAKTK IN STMTBREAKPARSER");
         }
         semicn = TLIterator.readNext();

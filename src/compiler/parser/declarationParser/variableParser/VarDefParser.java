@@ -3,6 +3,7 @@ package compiler.parser.declarationParser.variableParser;
 import enums.LexType;
 import compiler.parser.expressionParser.ConstExpParser;
 import compiler.parser.terminalParser.IdentParser;
+import struct.symbol.symbol.*;
 import struct.token.Token;
 import utils.TLIterator;
 import struct.syntaxTree.declaration.variable.initVal.InitVal;
@@ -41,6 +42,7 @@ public class VarDefParser {
         leftBrackets = new ArrayList<>();
         constExps = new ArrayList<>();
         rightBrackets = new ArrayList<>();
+
         ident = new IdentParser().parseIdent();
         Token token = TLIterator.readNext();
         while (token.getType().equals(LexType.LBRACK)) {

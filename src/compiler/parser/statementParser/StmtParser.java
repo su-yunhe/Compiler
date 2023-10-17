@@ -70,7 +70,6 @@ public class StmtParser {
                 stmtEle = new StmtExpParser().parseStmtExp();
                 break;
             default:
-                System.out.println("ARRIVE UNEXPECTED DEFAULT BRANCH");
                 // TODO:如果没有匹配到任何有效字符，说明当前应当为缺少分号的i类错误
                 handleIError();
         }
