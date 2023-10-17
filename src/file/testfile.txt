@@ -1,7 +1,15 @@
-int g(){
-    return 0;
+
+const int xfy=1;
+void a(){
+    xfy=2;
+    zbj=4;
+    const int zbj=3;
+}
+int b(){
+    zbj=5;
+    return 1;
 }
 int main() {
-    g = 1;
+    zbj=5;
     return 0;
 }

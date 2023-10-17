@@ -1,6 +1,6 @@
 package struct.syntaxTree.statement.stmt;
 
-import eumes.ReturnType;
+import enums.ReturnType;
 import struct.token.Token;
 import struct.syntaxTree.expression.Exp;
 

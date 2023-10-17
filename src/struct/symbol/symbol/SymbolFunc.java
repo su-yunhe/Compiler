@@ -1,44 +1,46 @@
-package struct.symbol;
+package struct.symbol.symbol;
 
 import enums.SymbolType;
+import struct.symbol.symbol.Symbol;
 
 import java.util.ArrayList;
 
-public class SymbolVar1 extends Symbol {
-    private ArrayList<Integer> value;
+public class SymbolFunc extends Symbol {
+    private ArrayList<Symbol> value;
 
-    public SymbolVar1(int lineNum, String name, SymbolType symbolType, int dimension) {
+    public SymbolFunc(int lineNum, String name, SymbolType symbolType, int dimension) {
         super(lineNum, name, symbolType, dimension);
         this.value = null;
     }
 
-    public SymbolVar1(int lineNum, String name, SymbolType symbolType, int dimension, ArrayList<Integer> value) {
+    public SymbolFunc(int lineNum, String name, SymbolType symbolType, int dimension, ArrayList<Symbol> value) {
         super(lineNum, name, symbolType, dimension);
         this.value = value;
     }
 
-    public void setValue(ArrayList<Integer> value) {
+    public void setValue(ArrayList<Symbol> value) {
         this.value = value;
     }
 
-    public ArrayList<Integer> getValue() {
+    public ArrayList<Symbol> getValue() {
         return value;
     }
 
     public String value2String() {
         StringBuilder sb = new StringBuilder();
         if (value == null) {
-            sb.append("undefined").append("\n");
+            sb.append("undefined");
+        } else if (value.isEmpty()) {
+            sb.append("the func has no parameter!");
         } else {
-            sb.append("{ ");
-            for (Integer i : value) {
-                sb.append(i).append(" ");
+            sb.append("( ");
+            for (Symbol symbol: value) {
+                sb.append(symbol.getSymbolType()).append(" ");
             }
-            sb.append("}").append("\n");
+            sb.append(")");
         }
         return sb.toString();
     }
-
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
@@ -46,7 +48,7 @@ public class SymbolVar1 extends Symbol {
         sb.append("name: ").append(name).append(", ");
         sb.append("symbolType: ").append(symbolType).append(", ");
         sb.append("dimension: ").append(dimension).append(", ");
-        sb.append("initVal: ").append(value2String());
+        sb.append("initVal: ").append(value2String()).append("\n");
         return sb.toString();
     }
 }

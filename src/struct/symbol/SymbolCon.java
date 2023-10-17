@@ -1,6 +1,6 @@
 package struct.symbol;
 
-import eumes.SymbolType;
+import enums.SymbolType;
 
 public class SymbolCon extends Symbol {
     private Integer value;

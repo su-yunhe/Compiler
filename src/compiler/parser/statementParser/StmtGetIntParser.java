@@ -1,13 +1,13 @@
 package compiler.parser.statementParser;
 
-import eumes.LexType;
+import enums.LexType;
 import compiler.parser.expressionParser.primaryExpParser.LValParser;
 import struct.token.Token;
 import utils.TLIterator;
 import struct.syntaxTree.expression.primaryExp.LVal;
 import struct.syntaxTree.statement.stmt.StmtGetInt;
 import utils.ErrorUtils;
-import eumes.SymbolType;
+import enums.SymbolType;
 
 public class StmtGetIntParser {
     /* StmtGetint Attributes */

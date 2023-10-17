@@ -1,6 +1,6 @@
 package compiler.parser.expressionParser.unaryExpParser;
 
-import eumes.LexType;
+import enums.LexType;
 import compiler.parser.expressionParser.FuncRParamsParser;
 import struct.token.Token;
 import utils.TLIterator;
@@ -31,6 +31,7 @@ public class UnaryExpFuncParser {
     public UnaryExpFunc parseUnaryFuncExp() {
         /* Ident */
         ident = new IdentParser().parseIdent();
+        System.out.println(ident.getName());
         // TODO: 处理c类错误：未定义名字 & 获取维数
         handleCError(ident);
         /* '(' */
@@ -66,6 +67,8 @@ public class UnaryExpFuncParser {
      */
     private void handleCError(Ident ident) {
         Symbol symbol = STStack.getDefinedSymbol(ident.getName());
+        System.out.println("symbol");
+        System.out.println(symbol);
         if (symbol == null) {
             ErrorUtils.handleC(ident);
         } else {
@@ -127,7 +130,7 @@ public class UnaryExpFuncParser {
             Exp exp = exps.get(i);
             System.out.println(exp.getDimension());
             Symbol symbol1 = symbols.get(i);
-            System.out.println(symbol1);
+            System.out.println(symbol1.getDimension());
             if (exp.getDimension() != symbol1.getDimension()) {
                 ErrorUtils.handleE(ident);
                 return;

@@ -1,6 +1,6 @@
 package compiler.parser;
 
-import eumes.LexType;
+import enums.LexType;
 import struct.token.Token;
 import compiler.parser.declarationParser.DeclParser;
 import compiler.parser.functionParser.FuncDefParser;
@@ -39,7 +39,6 @@ public class Parser {
         parseFuncDefs();
         /* parse MainFuncDef */
         parseMainFuncDef();
-        System.out.println(STStack.STStackToString());
         return new CompUnit(decls, funcDefs, mainFuncDef);
     }
 

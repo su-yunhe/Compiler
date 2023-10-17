@@ -1,6 +1,6 @@
 package struct.syntaxTree.statement.stmt;
 
-import eumes.ReturnType;
+import enums.ReturnType;
 import struct.syntaxTree.statement.BlockItemEle;
 
 /**

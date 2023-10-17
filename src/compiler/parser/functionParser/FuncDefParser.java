@@ -1,10 +1,9 @@
 package compiler.parser.functionParser;
 
-import eumes.LexType;
+import enums.LexType;
 import compiler.parser.statementParser.BlockParser;
-import eumes.ReturnType;
+import enums.ReturnType;
 import struct.syntaxTree.statement.BlockItem;
-import struct.syntaxTree.statement.BlockItemEle;
 import struct.syntaxTree.statement.stmt.Stmt;
 import struct.syntaxTree.statement.stmt.StmtReturn;
 import struct.token.Token;
@@ -19,7 +18,7 @@ import utils.ErrorUtils;
 import struct.symbolTable.STStack;
 import struct.symbol.Symbol;
 import struct.symbol.SymbolFunc;
-import eumes.SymbolType;
+import enums.SymbolType;
 
 import java.util.ArrayList;
 
@@ -52,6 +51,8 @@ public class FuncDefParser {
         leftParent = TLIterator.readNext();
         rightParent = TLIterator.readNext();
         if (rightParent.getType().equals(LexType.RPARENT)) {
+            // TODO: 将函数定义中的形参加入 SymbolFunc 的形参列表中
+            setPmtList(funcFParams, symbolFunc);
             /* Block */
             block = new BlockParser().parseBlock();
             funcDef = new FuncDef(funcType, ident, leftParent, rightParent, block);
@@ -59,6 +60,8 @@ public class FuncDefParser {
             if (rightParent.getType().equals(LexType.LBRACE)) {
                 // TODO: 处理 j 类错误：缺失右小括号`)`【无参数时】
                 handleJErrorNull();
+                // TODO: 将函数定义中的形参加入 SymbolFunc 的形参列表中
+                setPmtList(funcFParams, symbolFunc);
                 block = new BlockParser().parseBlock();
                 funcDef = new FuncDef(funcType, ident, leftParent, rightParent, block);
             } else {
@@ -70,13 +73,14 @@ public class FuncDefParser {
                 // TODO: 处理 j 类错误：缺失右小括号`)`【有参数时】
                 handleJErrorFuncFParams();
                 /* Block */
+                // TODO: 将函数定义中的形参加入 SymbolFunc 的形参列表中
+                setPmtList(funcFParams, symbolFunc);
                 block = new BlockParser().parseBlock();
 
                 funcDef = new FuncDef(funcType, ident, leftParent, funcFParams, rightParent, block);
             }
         }
-        // TODO: 将函数定义中的形参加入 SymbolFunc 的形参列表中
-        setPmtList(funcFParams, symbolFunc);
+
         System.out.println(STStack.STStackToString());
         // TODO: 处理 f 类错误：无返回值的函数存在不匹配的return语句
         handleFError(block);

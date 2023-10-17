@@ -3,7 +3,7 @@ package struct.syntaxTree.expression.primaryExp;
 import struct.token.Token;
 import struct.syntaxTree.expression.Exp;
 import struct.syntaxTree.terminal.Ident;
-import eumes.SymbolType;
+import enums.SymbolType;
 
 import java.util.ArrayList;
 

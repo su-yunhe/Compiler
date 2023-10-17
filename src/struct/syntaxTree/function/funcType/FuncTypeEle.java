@@ -1,6 +1,6 @@
 package struct.syntaxTree.function.funcType;
 
-import eumes.LexType;
+import enums.LexType;
 
 /**
  * 函数类型类文法基类接口

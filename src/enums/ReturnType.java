@@ -1,4 +1,4 @@
-package eumes;
+package enums;
 
 public enum ReturnType {
     NONE, VOID, INT

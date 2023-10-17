@@ -1,6 +1,6 @@
 package struct.syntaxTree.statement;
 
-import eumes.ReturnType;
+import enums.ReturnType;
 
 /**
  * BlockItem 语句块类

@@ -1,6 +1,6 @@
 package struct.syntaxTree.terminal;
 
-import eumes.LexType;
+import enums.LexType;
 import struct.token.Token;
 
 /**

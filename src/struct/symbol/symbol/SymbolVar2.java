@@ -1,28 +1,21 @@
-package struct.symbol;
+package struct.symbol.symbol;
 
 import enums.SymbolType;
+import struct.symbol.symbol.Symbol;
 
 import java.util.ArrayList;
 
-public class SymbolVar1 extends Symbol {
-    private ArrayList<Integer> value;
+public class SymbolVar2 extends Symbol {
 
-    public SymbolVar1(int lineNum, String name, SymbolType symbolType, int dimension) {
+    private ArrayList<ArrayList<Integer>> value;
+    public SymbolVar2(int lineNum, String name, SymbolType symbolType, int dimension) {
         super(lineNum, name, symbolType, dimension);
         this.value = null;
     }
 
-    public SymbolVar1(int lineNum, String name, SymbolType symbolType, int dimension, ArrayList<Integer> value) {
+    public SymbolVar2(int lineNum, String name, SymbolType symbolType, int dimension, ArrayList<ArrayList<Integer>> value) {
         super(lineNum, name, symbolType, dimension);
         this.value = value;
-    }
-
-    public void setValue(ArrayList<Integer> value) {
-        this.value = value;
-    }
-
-    public ArrayList<Integer> getValue() {
-        return value;
     }
 
     public String value2String() {
@@ -31,8 +24,12 @@ public class SymbolVar1 extends Symbol {
             sb.append("undefined").append("\n");
         } else {
             sb.append("{ ");
-            for (Integer i : value) {
-                sb.append(i).append(" ");
+            for (ArrayList<Integer> arrayList : value) {
+                sb.append("( ");
+                for (Integer i: arrayList) {
+                    sb.append(i).append(" ");
+                }
+                sb.append(") ");
             }
             sb.append("}").append("\n");
         }

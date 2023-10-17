@@ -1,6 +1,6 @@
 package compiler.parser.expressionParser.multiExpParser;
 
-import eumes.LexType;
+import enums.LexType;
 import struct.token.Token;
 import utils.TLIterator;
 import struct.syntaxTree.expression.multiExp.EqExp;

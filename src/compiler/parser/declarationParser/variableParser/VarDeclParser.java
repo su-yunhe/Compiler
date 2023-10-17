@@ -1,6 +1,6 @@
 package compiler.parser.declarationParser.variableParser;
 
-import eumes.LexType;
+import enums.LexType;
 import struct.token.Token;
 import utils.TLIterator;
 import compiler.parser.declarationParser.constantParser.BTypeParser;

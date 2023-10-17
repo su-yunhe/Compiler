@@ -1,4 +1,4 @@
-package eumes;
+package enums;
 
 /**
  * 符号类型枚举类

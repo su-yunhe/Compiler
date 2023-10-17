@@ -1,6 +1,6 @@
 package compiler.parser.functionParser;
 
-import eumes.LexType;
+import enums.LexType;
 import struct.token.Token;
 import utils.TLIterator;
 import struct.syntaxTree.function.funcType.FuncType;

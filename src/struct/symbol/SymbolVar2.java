@@ -1,6 +1,6 @@
 package struct.symbol;
 
-import eumes.SymbolType;
+import enums.SymbolType;
 
 import java.util.ArrayList;
 

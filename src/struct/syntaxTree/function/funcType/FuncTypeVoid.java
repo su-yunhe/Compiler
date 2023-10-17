@@ -1,6 +1,6 @@
 package struct.syntaxTree.function.funcType;
 
-import eumes.LexType;
+import enums.LexType;
 import struct.token.Token;
 
 /** FuncTypeVoid void型函数类

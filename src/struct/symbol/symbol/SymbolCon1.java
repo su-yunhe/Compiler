@@ -1,18 +1,19 @@
-package struct.symbol;
+package struct.symbol.symbol;
 
 import enums.SymbolType;
+import struct.symbol.symbol.Symbol;
 
 import java.util.ArrayList;
 
-public class SymbolVar1 extends Symbol {
+public class SymbolCon1 extends Symbol {
     private ArrayList<Integer> value;
 
-    public SymbolVar1(int lineNum, String name, SymbolType symbolType, int dimension) {
+    public SymbolCon1(int lineNum, String name, SymbolType symbolType, int dimension) {
         super(lineNum, name, symbolType, dimension);
         this.value = null;
     }
 
-    public SymbolVar1(int lineNum, String name, SymbolType symbolType, int dimension, ArrayList<Integer> value) {
+    public SymbolCon1(int lineNum, String name, SymbolType symbolType, int dimension, ArrayList<Integer> value) {
         super(lineNum, name, symbolType, dimension);
         this.value = value;
     }
@@ -31,7 +32,7 @@ public class SymbolVar1 extends Symbol {
             sb.append("undefined").append("\n");
         } else {
             sb.append("{ ");
-            for (Integer i : value) {
+            for (Integer i : (ArrayList<Integer>)value) {
                 sb.append(i).append(" ");
             }
             sb.append("}").append("\n");

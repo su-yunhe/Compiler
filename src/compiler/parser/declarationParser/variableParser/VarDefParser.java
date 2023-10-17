@@ -1,6 +1,6 @@
 package compiler.parser.declarationParser.variableParser;
 
-import eumes.LexType;
+import enums.LexType;
 import compiler.parser.expressionParser.ConstExpParser;
 import compiler.parser.terminalParser.IdentParser;
 import struct.token.Token;
@@ -15,7 +15,7 @@ import struct.syntaxTree.terminal.Ident;
 import utils.ErrorUtils;
 import struct.symbolTable.STStack;
 import struct.symbol.*;
-import eumes.SymbolType;
+import enums.SymbolType;
 
 import java.util.ArrayList;
 
@@ -89,8 +89,9 @@ public class VarDefParser {
             // TODO: 处理 b 类错误：名字重定义
             handleBError(ident);
         } else {
+            STStack.getCurrentTable().addSymbol(symbol);
             if (isDefCorrect) {
-                STStack.getCurrentTable().addSymbol(symbol);
+
             }
         }
     }

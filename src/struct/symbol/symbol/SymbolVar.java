@@ -1,8 +1,9 @@
-package struct.symbol;
+package struct.symbol.symbol;
 
 import enums.SymbolType;
+import struct.symbol.symbol.Symbol;
 
-public class SymbolVar extends Symbol{
+public class SymbolVar extends Symbol {
     private Integer value;
     public SymbolVar(int lineNum, String name, SymbolType symbolType, int dimension) {
         super(lineNum, name, symbolType, dimension);

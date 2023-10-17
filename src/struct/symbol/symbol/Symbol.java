@@ -1,4 +1,4 @@
-package struct.symbol;
+package struct.symbol.symbol;
 
 import enums.SymbolType;
 

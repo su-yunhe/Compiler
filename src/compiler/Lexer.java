@@ -1,6 +1,6 @@
 package compiler;
 
-import eumes.LexType;
+import enums.LexType;
 import struct.token.Token;
 import struct.token.TokenList;
 

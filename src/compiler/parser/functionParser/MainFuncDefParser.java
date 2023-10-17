@@ -1,8 +1,8 @@
 package compiler.parser.functionParser;
 
-import eumes.ReturnType;
-import eumes.SymbolType;
-import eumes.LexType;
+import enums.ReturnType;
+import enums.SymbolType;
+import enums.LexType;
 import compiler.parser.statementParser.BlockParser;
 import struct.symbolTable.STStack;
 import struct.token.Token;

@@ -1,6 +1,6 @@
 package compiler.parser.declarationParser.constantParser;
 
-import eumes.LexType;
+import enums.LexType;
 import struct.token.Token;
 import utils.TLIterator;
 import compiler.parser.expressionParser.ConstExpParser;
@@ -13,7 +13,7 @@ import utils.ErrorUtils;
 import struct.symbolTable.STStack;
 import struct.symbol.Symbol;
 import struct.symbol.SymbolCon;
-import eumes.SymbolType;
+import enums.SymbolType;
 import struct.symbol.SymbolCon1;
 import struct.symbol.SymbolCon2;
 
@@ -84,8 +84,9 @@ public class ConstDefParser {
             // TODO: 处理 b 类错误：名字重定义
             handleBError(ident);
         } else {
+            STStack.getCurrentTable().addSymbol(symbol);
             if (isDefCorrect) {
-                STStack.getCurrentTable().addSymbol(symbol);
+
             }
         }
     }

@@ -1,6 +1,6 @@
 package compiler.parser.statementParser;
 
-import eumes.LexType;
+import enums.LexType;
 import struct.token.Token;
 import utils.TLIterator;
 import compiler.parser.expressionParser.ExpParser;
@@ -9,7 +9,7 @@ import struct.syntaxTree.expression.Exp;
 import struct.syntaxTree.expression.primaryExp.LVal;
 import struct.syntaxTree.statement.stmt.StmtAssign;
 import utils.ErrorUtils;
-import eumes.SymbolType;
+import enums.SymbolType;
 
 public class StmtAssignParser {
     /* StmtAssign Attributes */

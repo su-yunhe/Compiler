@@ -1,6 +1,6 @@
 package utils;
 
-import eumes.ErrorType;
+import enums.ErrorType;
 import struct.error.Error;
 import struct.error.ErrorTable;
 import struct.syntaxTree.statement.Block;

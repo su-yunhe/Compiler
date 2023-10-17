@@ -24,8 +24,8 @@ public class Compiler {
         // 1. 调用词法分析程序,生成单词列表
 //        useLexer("testfile.txt", "output.txt", true);
 //        useLexer(".//src//testfile.txt", ".//src//output.txt", true);
-//        useLexer("testfile.txt", "error.txt", true);
-        useLexer(".//src//file//testfile.txt", ".//src//file//error.txt", true);
+        useLexer("testfile.txt", "error.txt", true);
+//        useLexer(".//src//file//testfile.txt", ".//src//file//error.txt", true);
     }
 
     /**

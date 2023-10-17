@@ -1,15 +1,16 @@
-package struct.symbol;
+package struct.symbol.symbol;
 
 import enums.SymbolType;
+import struct.symbol.symbol.Symbol;
 
-public class SymbolVar extends Symbol{
+public class SymbolCon extends Symbol {
     private Integer value;
-    public SymbolVar(int lineNum, String name, SymbolType symbolType, int dimension) {
+    public SymbolCon(int lineNum, String name, SymbolType symbolType, int dimension) {
         super(lineNum, name, symbolType, dimension);
         this.value = null;
     }
 
-    public SymbolVar(int lineNum, String name, SymbolType symbolType, int dimension, Integer value) {
+    public SymbolCon(int lineNum, String name, SymbolType symbolType, int dimension, Integer value) {
         super(lineNum, name, symbolType, dimension);
         this.value = value;
     }
@@ -34,6 +35,7 @@ public class SymbolVar extends Symbol{
         } else {
             sb.append("initVal: ").append(value).append("\n");
         }
+
         return sb.toString();
     }
 }

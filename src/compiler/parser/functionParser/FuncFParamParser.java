@@ -1,6 +1,6 @@
 package compiler.parser.functionParser;
 
-import eumes.LexType;
+import enums.LexType;
 import struct.token.Token;
 import utils.TLIterator;
 import compiler.parser.declarationParser.constantParser.BTypeParser;
@@ -13,7 +13,7 @@ import struct.syntaxTree.terminal.Ident;
 import utils.ErrorUtils;
 import struct.symbolTable.STStack;
 import struct.symbol.*;
-import eumes.SymbolType;
+import enums.SymbolType;
 
 import java.util.ArrayList;
 
@@ -84,8 +84,9 @@ public class FuncFParamParser {
             // TODO: 处理 b 类错误：名字重定义
             handleBError(ident);
         } else {
+            STStack.getCurrentTable().addSymbol(symbol);
             if (isDefCorrect) {
-                STStack.getCurrentTable().addSymbol(symbol);
+
             }
         }
     }

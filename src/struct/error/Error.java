@@ -1,6 +1,6 @@
 package struct.error;
 
-import eumes.ErrorType;
+import enums.ErrorType;
 
 /**
  * 错误类

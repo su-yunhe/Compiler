@@ -1,6 +1,6 @@
 package struct.token;
 
-import eumes.LexType;
+import enums.LexType;
 
 /**
  * 单词类，保存单词信息
