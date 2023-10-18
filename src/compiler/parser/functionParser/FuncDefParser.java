@@ -83,6 +83,7 @@ public class FuncDefParser {
         handleFError(block);
         // TODO: 处理 g 类错误：缺失有返回值的 return 语句
         handleGError(block);
+        System.out.println(STStack.STStackToString());
         // TODO: 弹出当前符号表
         STStack.popST();
         return funcDef;

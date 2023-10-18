@@ -66,8 +66,6 @@ public class UnaryExpFuncParser {
      */
     private void handleCError(Ident ident) {
         Symbol symbol = STStack.getDefinedSymbol(ident.getName());
-        System.out.println("symbol");
-        System.out.println(symbol);
         if (symbol == null) {
             ErrorUtils.handleC(ident);
         } else {
